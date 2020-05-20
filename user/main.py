@@ -1,4 +1,5 @@
 # a = list(input('please werite something here: '))
+from collections import namedtuple
 
 
 class User:
