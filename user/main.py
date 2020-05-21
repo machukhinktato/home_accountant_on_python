@@ -1,4 +1,4 @@
-# a = list(input('please werite something here: '))
+from datetime import datetime
 
 
 class User:
@@ -9,10 +9,10 @@ class User:
         self.target = target
 
     def __str__(self):
-        return f'Имя клиента {self.name}, ''\n' \
-               f'Доход {self.income} руб, ' '\n' \
-               f'На счете {self.balance} руб, ' '\n' \
-               f'Желаемый остаток на конец месяца {self.target} руб'
+        return f'Имя клиента {self.name}, \n' \
+               f'Доход {self.income} руб, \n' \
+               f'На счете {self.balance} руб, \n' \
+               f'Желаемый остаток на конец месяца {self.target} руб \n'
 
     # def create_user(self, name, income, balance, target):
     #     account = {
@@ -24,19 +24,26 @@ class User:
     #
     #     return {'account': account}
 
+
 class Account():
-    def __init__(self, expenses, income):
+    def __init__(self, owner, expenses, income):
+        self.owner = owner
         self.expenses = expenses
         self.income = income
 
     def __str__(self):
-        return f'Расходы {self.expenses}''\n'\
+        return f'Владелец {self.owner} \n' \
+               f'Расходы {self.expenses} \n' \
                f'Доходы {self.income}'
+
+# class Account_Management():
+
+
 
 
 if __name__ == '__main__':
     a = User('Vasya', 50000, 10000, 5000)
     # b = User.create_user('Misha', 50000, 10000, 5000, 5)
     print(a)
-    c = Account(45000, a.income)
+    c = Account(a.name, 45000, a.income)
     print(c)
