@@ -14,24 +14,29 @@ class User:
                f'На счете {self.balance} руб, ' '\n' \
                f'Желаемый остаток на конец месяца {self.target} руб'
 
-    def create_user(self, name, income, balance, target):
-        account = {
-            'name': name,
-            'income': income,
-            'balance': balance,
-            'target': target
-        }
+    # def create_user(self, name, income, balance, target):
+    #     account = {
+    #         'name': name,
+    #         'income': income,
+    #         'balance': balance,
+    #         'target': target
+    #     }
+    #
+    #     return {'account': account}
 
-        return {'account': account}
+class Account():
+    def __init__(self, expenses, income):
+        self.expenses = expenses
+        self.income = income
 
-    def edit_user(self, account):
-        self.account = account
-
-        return account
-
+    def __str__(self):
+        return f'Расходы {self.expenses}''\n'\
+               f'Доходы {self.income}'
 
 
 if __name__ == '__main__':
     a = User('Vasya', 50000, 10000, 5000)
-    b = User.create_user('Misha', 50000, 10000, 5000, 5)
-    print(a, '\n',  b)
+    # b = User.create_user('Misha', 50000, 10000, 5000, 5)
+    print(a)
+    c = Account(45000, a.income)
+    print(c)
