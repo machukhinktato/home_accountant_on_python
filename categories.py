@@ -3,7 +3,7 @@ import abc
 
 class AbstractCategory(metaclass=abc.ABCMeta):
     def __init__(self):
-        self.category = Category_format()
+        self.category = Categories()
 
     def post_income(self):
         pass
@@ -13,27 +13,25 @@ class AbstractCategory(metaclass=abc.ABCMeta):
 
 
 class Categories:
+
     title = {
-        'foodstuff': foodstuff,
-        'alcohol': alcohol,
-        'car': car,
-        'entertaiment': entertaiment,
-        'studies': studies,
-        'products': products,
-        'fines': fines,
-        'furniture': furniture,
-        'job': job,
-        'utility_bills': utility_bills,
-        'user_pick': {},
+        'products': Products,
+        'entertaiment': Entertaiment,
+        'municipal_services': MunicipalServices,
+        'car': Car,
+        'domestic_appliances': DomesticApp,
+        'furniture': Furniture,
         }
 
-    def add_category(self, categories, user_pick):
-        categories = categories()
-        user_pick = user_pick
-        categories.title.update(user_pick=user_pick)
-        return categories
+    # will be realized later
+    # def add_category(self, categories, user_pick):
+    #     categories = categories()
+    #     user_pick = user_pick
+    #     categories.title.update(user_pick=user_pick)
+    #     return categories
+    #
+    # def del_category(self, categories, which_one):
+    #     categories = categories()
+    #     categories.user_pick.pop(which_one)
+    #     return categories
 
-    def del_category(self, categories, which_one):
-        categories = categories()
-        categories.user_pick.pop(which_one)
-        return categories
