@@ -24,9 +24,16 @@ class Categories:
         'furniture': furniture,
         'job': job,
         'utility_bills': utility_bills,
+        'user_pick': {},
         }
 
     def add_category(self, categories, user_pick):
         categories = categories()
         user_pick = user_pick
         categories.title.update(user_pick=user_pick)
+        return categories
+
+    def del_category(self, categories, which_one):
+        categories = categories()
+        categories.user_pick.pop(which_one)
+        return categories
