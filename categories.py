@@ -13,7 +13,6 @@ class AbstractCategory(metaclass=abc.ABCMeta):
 
 
 class Categories:
-
     title = {
         'products': Products,
         'entertaiment': Entertaiment,
@@ -21,7 +20,37 @@ class Categories:
         'car': Car,
         'domestic_appliances': DomesticApp,
         'furniture': Furniture,
-        }
+    }
+
+
+class BaseCategoriesMixin:
+    def __init__(self):
+        self.title = title
+        self.expenses = expenses
+
+
+class Products(BaseCategoriesMixin, title):
+    pass
+
+
+class Entertaiment(BaseCategoriesMixin, title):
+    pass
+
+
+class MunicipalServices(BaseCategoriesMixin, title):
+    pass
+
+
+class Car(BaseCategoriesMixin, title):
+    pass
+
+
+class DomesticApp(BaseCategoriesMixin, title):
+    pass
+
+
+class Furniture(BaseCategoriesMixin, title):
+    pass
 
     # will be realized later
     # def add_category(self, categories, user_pick):
@@ -34,4 +63,3 @@ class Categories:
     #     categories = categories()
     #     categories.user_pick.pop(which_one)
     #     return categories
-
