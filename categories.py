@@ -2,15 +2,50 @@ import abc
 
 
 class AbstractCategory(metaclass=abc.ABCMeta):
-    def __init__(self):
-        self.category = Categories()
+    pass
+    # def __init__(self):
+    #     self.category = Categories()
+    #
+    # def post_income(self):
+    #     pass
+    #
+    # def post_expense(self):
+    #     pass
 
-    def post_income(self):
-        pass
 
-    def post_expense(self):
-        pass
 
+
+
+class BaseCategoriesMixin:
+    def __init__(self, title):
+        self.title = title
+
+    def __str__(self):
+        return f'{self.title}'
+
+
+class Products(BaseCategoriesMixin):
+    pass
+
+
+class Entertaiment(BaseCategoriesMixin):
+    pass
+
+
+class MunicipalServices(BaseCategoriesMixin):
+    pass
+
+
+class Car(BaseCategoriesMixin):
+    pass
+
+
+class DomesticApp(BaseCategoriesMixin):
+    pass
+
+
+class Furniture(BaseCategoriesMixin):
+    pass
 
 class Categories:
     title = {
@@ -21,36 +56,6 @@ class Categories:
         'domestic_appliances': DomesticApp,
         'furniture': Furniture,
     }
-
-
-class BaseCategoriesMixin:
-    def __init__(self):
-        self.title = title
-        self.expenses = expenses
-
-
-class Products(BaseCategoriesMixin, title):
-    pass
-
-
-class Entertaiment(BaseCategoriesMixin, title):
-    pass
-
-
-class MunicipalServices(BaseCategoriesMixin, title):
-    pass
-
-
-class Car(BaseCategoriesMixin, title):
-    pass
-
-
-class DomesticApp(BaseCategoriesMixin, title):
-    pass
-
-
-class Furniture(BaseCategoriesMixin, title):
-    pass
 
     # will be realized later
     # def add_category(self, categories, user_pick):
@@ -63,3 +68,7 @@ class Furniture(BaseCategoriesMixin, title):
     #     categories = categories()
     #     categories.user_pick.pop(which_one)
     #     return categories
+
+
+a = BaseCategoriesMixin('Дима')
+print(a)
