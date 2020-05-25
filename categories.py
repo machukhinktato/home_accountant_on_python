@@ -3,12 +3,16 @@ import abc
 
 class AbstractCategory(metaclass=abc.ABCMeta):
     def __init__(self):
-        self.category = Category()
+        self.category = Category_format()
 
-    def set_income(self):
+    def post_income(self):
         pass
 
-    def get_expense(self):
+    def post_expense(self):
         pass
 
 
+class Category_form:
+    title = {}
+    expense = 0
+    income = 0
