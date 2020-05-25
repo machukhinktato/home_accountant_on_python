@@ -12,7 +12,21 @@ class AbstractCategory(metaclass=abc.ABCMeta):
         pass
 
 
-class Category_form:
-    title = {}
-    expense = 0
-    income = 0
+class Categories:
+    title = {
+        'foodstuff': foodstuff,
+        'alcohol': alcohol,
+        'car': car,
+        'entertaiment': entertaiment,
+        'studies': studies,
+        'products': products,
+        'fines': fines,
+        'furniture': furniture,
+        'job': job,
+        'utility_bills': utility_bills,
+        }
+
+    def add_category(self, categories, user_pick):
+        categories = categories()
+        user_pick = user_pick
+        categories.title.update(user_pick=user_pick)
