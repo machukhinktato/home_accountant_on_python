@@ -3,17 +3,14 @@
 
 # class AbstractCategory(metaclass=abc.ABCMeta):
 #     pass
-    # def __init__(self):
-    #     self.category = Categories()
-    #
-    # def post_income(self):
-    #     pass
-    #
-    # def post_expense(self):
-    #     pass
-
-
-
+# def __init__(self):
+#     self.category = Categories()
+#
+# def post_income(self):
+#     pass
+#
+# def post_expense(self):
+#     pass
 
 
 class BaseCategoriesMixin:
@@ -47,6 +44,7 @@ class DomesticApp(BaseCategoriesMixin):
 
 class Furniture(BaseCategoriesMixin):
     pass
+
 
 class Categories:
     title = {
