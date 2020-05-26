@@ -1,8 +1,8 @@
 import abc
 
 
-class AbstractCategory(metaclass=abc.ABCMeta):
-    pass
+# class AbstractCategory(metaclass=abc.ABCMeta):
+#     pass
     # def __init__(self):
     #     self.category = Categories()
     #
@@ -19,6 +19,7 @@ class AbstractCategory(metaclass=abc.ABCMeta):
 class BaseCategoriesMixin:
     def __init__(self, title):
         self.title = title
+        self.expense = 0
 
     def __str__(self):
         return f'{self.title}'
@@ -71,4 +72,4 @@ class Categories:
 
 
 a = BaseCategoriesMixin('Дима')
-print(a)
+print(a.expense)
