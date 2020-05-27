@@ -1,14 +1,14 @@
-from categories import Categories
+from categories import *
 
 
-class BaseExpenses:
-    def __init__(self, name, expense):
-        self.title = name
-        self.expense = expense
+class BaseExpenses(BaseCategoriesMixin):
+    def __init__(self, title, expenses):
+        self.title = title
+        self.expenses = expenses
 
     #
     def __str__(self):
-        return f'{self.title} {self.expense}'
+        return f'{self.title} {self.expenses}'
 
     # def __repr__(self):
     #     return f'{self.title} {self.expense}'

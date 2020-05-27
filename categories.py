@@ -13,39 +13,40 @@
 #     pass
 
 
-# class BaseCategoriesMixin:
-#     def __init__(self):
-#         self.title = ''
-#
-#     def __str__(self):
-#         return f'{self.title}'
-#
-#     def __repr__(self):
-#         return f'{self.title}'
+class BaseCategoriesMixin:
+    def __init__(self):
+        self.title = ''
+        se;f.expenses = []
+
+    def __str__(self):
+        return f'{self.title}'
+
+    def __repr__(self):
+        return f'{self.title}'
 
 
-class Products:
+class Products(BaseCategoriesMixin):
     title = 'Продукты'
 
 
 
-class Entertaiment:#(BaseCategoriesMixin):
+class Entertaiment(BaseCategoriesMixin):
     title = 'Развлечение'
 
 
-class MunicipalServices:#(BaseCategoriesMixin):
+class MunicipalServices(BaseCategoriesMixin):
     title = 'Коммунальные услуги'
 
 
-class Car:#(BaseCategoriesMixin):
+class Car(BaseCategoriesMixin):
     title = 'Машина'
 
 
-class DomesticApp:#(BaseCategoriesMixin):
+class DomesticApp(BaseCategoriesMixin):
     title = 'Бытовая техника'
 
 
-class Furniture:#"(BaseCategoriesMixin)":
+class Furniture(BaseCategoriesMixin):
     title = 'Мебель'
 
 
