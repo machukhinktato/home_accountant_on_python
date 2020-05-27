@@ -14,9 +14,8 @@
 
 
 class BaseCategoriesMixin:
-    def __init__(self, title, expense):
+    def __init__(self, title):
         self.title = title
-        self.expense = expense
 
 
     def __str__(self):
