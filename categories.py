@@ -19,7 +19,7 @@ class BaseCategoriesMixin:
 
 
     def __str__(self):
-        return f'{self.title} {self.expense}'
+        return f'{self.title}'
 
 
 
