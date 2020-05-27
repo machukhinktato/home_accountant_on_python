@@ -13,35 +13,39 @@
 #     pass
 
 
-class BaseCategoriesMixin:
-    def __init__(self):
-        self.title = ''
+# class BaseCategoriesMixin:
+#     def __init__(self):
+#         self.title = ''
+#
+#     def __str__(self):
+#         return f'{self.title}'
+#
+#     def __repr__(self):
+#         return f'{self.title}'
 
-    def __str__(self):
-        return f'{self.title}'
 
-
-class Products(BaseCategoriesMixin):
+class Products:
     title = 'Продукты'
 
 
-class Entertaiment(BaseCategoriesMixin):
+
+class Entertaiment:#(BaseCategoriesMixin):
     title = 'Развлечение'
 
 
-class MunicipalServices(BaseCategoriesMixin):
+class MunicipalServices:#(BaseCategoriesMixin):
     title = 'Коммунальные услуги'
 
 
-class Car(BaseCategoriesMixin):
+class Car:#(BaseCategoriesMixin):
     title = 'Машина'
 
 
-class DomesticApp(BaseCategoriesMixin):
+class DomesticApp:#(BaseCategoriesMixin):
     title = 'Бытовая техника'
 
 
-class Furniture(BaseCategoriesMixin):
+class Furniture:#"(BaseCategoriesMixin)":
     title = 'Мебель'
 
 
@@ -67,6 +71,5 @@ class Categories:
     #     categories.user_pick.pop(which_one)
     #     return categories
 
-
-a = BaseCategoriesMixin('Дима', expense=5000)
-print(a)
+# a = BaseCategoriesMixin('Дима', expense=5000)
+# print(a)

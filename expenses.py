@@ -1,21 +1,23 @@
-from categories import *
+from categories import Categories
 
 
-class BaseExpenses(BaseCategoriesMixin):
-    # def __init__(self, name, expense):
-    #     self.title = name
-    #     self.expense = expense
+class BaseExpenses:
+    def __init__(self, name, expense):
+        self.title = name
+        self.expense = expense
+
     #
-    # def __str__(self):
-    #     return f'{self.title} {self.expense}'
-    #
+    def __str__(self):
+        return f'{self.title} {self.expense}'
+
     # def __repr__(self):
     #     return f'{self.title} {self.expense}'
-    pass
+    # pass
 
 
+# b = Categories.title.get('products')
+# a = BaseExpenses(b.title, 3000)
+c = BaseExpenses(Categories.title.get('products').title, 3000)
 
-
-# print(type(Categories.title.keys()))
-a = BaseExpenses(Products('Продукты', 0), 3000)
-print(a)
+# print(a)
+print(c)
