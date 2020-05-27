@@ -14,12 +14,14 @@
 
 
 class BaseCategoriesMixin:
-    def __init__(self, title):
+    def __init__(self, title, expense):
         self.title = title
-        self.expense = 0
+        self.expense = expense
+
 
     def __str__(self):
-        return f'{self.title}'
+        return f'{self.title} {self.expense}'
+
 
 
 class Products(BaseCategoriesMixin):
@@ -69,5 +71,5 @@ class Categories:
     #     return categories
 
 
-a = BaseCategoriesMixin('Дима')
-print(a.expense)
+a = BaseCategoriesMixin('Дима', expense=5000)
+print(a)
