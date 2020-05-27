@@ -14,37 +14,35 @@
 
 
 class BaseCategoriesMixin:
-    def __init__(self, title):
-        self.title = title
-
+    def __init__(self):
+        self.title = ''
 
     def __str__(self):
         return f'{self.title}'
 
 
-
 class Products(BaseCategoriesMixin):
-    pass
+    title = 'Продукты'
 
 
 class Entertaiment(BaseCategoriesMixin):
-    pass
+    title = 'Развлечение'
 
 
 class MunicipalServices(BaseCategoriesMixin):
-    pass
+    title = 'Коммунальные услуги'
 
 
 class Car(BaseCategoriesMixin):
-    pass
+    title = 'Машина'
 
 
 class DomesticApp(BaseCategoriesMixin):
-    pass
+    title = 'Бытовая техника'
 
 
 class Furniture(BaseCategoriesMixin):
-    pass
+    title = 'Мебель'
 
 
 class Categories:
