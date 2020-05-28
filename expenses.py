@@ -4,7 +4,7 @@ from categories import *
 class BaseExpenses(BaseCategoriesMixin):
     def __init__(self, title, expenses):
         self.title = title
-        self.expenses = expenses
+        self.expenses = [expenses]
 
     #
     def __str__(self):
@@ -18,6 +18,8 @@ class BaseExpenses(BaseCategoriesMixin):
 # b = Categories.title.get('products')
 # a = BaseExpenses(b.title, 3000)
 c = BaseExpenses(Categories.title.get('products').title, 3000)
-
+d = BaseExpenses(Categories.title.get('products').title, 5000)
 # print(a)
 print(c)
+print(d)
+print(c.expenses.count())
