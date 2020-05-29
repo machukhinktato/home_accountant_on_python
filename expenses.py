@@ -6,20 +6,14 @@ class BaseExpenses(BaseCategoriesMixin):
         self.title = title
         self.expenses = [expenses]
 
-    #
     def __str__(self):
         return f'{self.title} {self.expenses}'
 
-    # def __repr__(self):
-    #     return f'{self.title} {self.expense}'
-    # pass
 
-
-# b = Categories.title.get('products')
-# a = BaseExpenses(b.title, 3000)
-c = BaseExpenses(Categories.title.get('products').title, 3000)
-d = BaseExpenses(Categories.title.get('products').title, 5000)
-# print(a)
-print(c)
-print(d)
-print(c.expenses.count())
+if __name__ == '__main__':
+    c = BaseExpenses(Categories.title.get('products').title, 3000)
+    d = BaseExpenses(Categories.title.get('products').title, 5000)
+    print(c.expenses[0])
+    print(d.expenses[0])
+    c = BaseExpenses(Categories.title.get('products').title, 7000)
+    print(c.expenses[0])

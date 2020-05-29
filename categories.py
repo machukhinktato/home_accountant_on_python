@@ -16,7 +16,7 @@
 class BaseCategoriesMixin:
     def __init__(self):
         self.title = ''
-        se;f.expenses = []
+        self.expenses = []
 
     def __str__(self):
         return f'{self.title}'
