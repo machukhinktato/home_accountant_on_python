@@ -9,10 +9,12 @@ class Expenses:
 
 
 if __name__ == '__main__':
-    products = Category('Продукты')
-    car = Category('Машина')
+    products = Category('Products')
+    car = Category('Car')
     print(products)
     expense = Expenses(products, 1000)
     expense = Expenses(products, 1000)
-    print(products.title, products.get_expense_list())
-    print(car.title, car.get_sum())
+    expense = Expenses(car, 5000)
+    expense = Expenses(products, 1000)
+    print(products.get_title(), products.get_expense_list(), products.get_sum())
+    print(car.get_title(), car.get_sum())
