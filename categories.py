@@ -2,6 +2,7 @@ class Category:
     def __init__(self, title):
         self.title = title
         self.fin_stream = []
+        self.income = []
 
     def __str__(self):
         return f'{self.title}'

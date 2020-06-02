@@ -3,8 +3,10 @@ from categories import *
 from expenses import *
 
 
-class FinancialStreams:
-    def __init__(self, category, value):
+class Account:
+    def __init__(self):
+        self.name = name
+        self.user_income = user_income
         self.category = category
         self.value = value
         self.category.fin_stream.append(self.value)

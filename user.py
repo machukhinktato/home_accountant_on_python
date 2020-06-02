@@ -1,32 +1,32 @@
 from categories import *
 
+
 class User:
     def __init__(self, name):
         self.name = name
+        self.income = []
+        # self.answer = 'there is no incomes'
 
     def __str__(self):
+        if self.income.__len__() > 0:
+            return f'{self.name} {self.income[0]}'
         return self.name
+
+    def set_income(self, income):
+        self.income.append(income)
+
+    def annual_income(self):
+        self.income.clear()
+        return f'list of income has no more values'
 
 
 if __name__ == '__main__':
     a = User('Mike')
     print(a)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    a.set_income(1000)
+    print(a)
+    print(a.annual_income())
+    print(a)
 
 # import abc
 #
