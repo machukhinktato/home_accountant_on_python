@@ -15,9 +15,9 @@ class UserBuildDirector:
 
 class User:
     name = ''
-    income = 0
-    balance = 0
-    wish_to_save = 0
+    income = []
+    balance = []
+    wish_to_save = []
 
 
 class AbstractTableBuilder(metaclass=abc.ABCMeta):
@@ -59,11 +59,9 @@ user__builder = UserBuilder()
 director = UserBuildDirector()
 Builder = director.construct
 
-
 if __name__ == '__main__':
     Builder(user__builder, 'Василий', 1000, 1500, 500)
-    Vasya = user__builder.person
-    print(f'Пользователь {Vasya.name}, с доходом {Vasya.income} рублей, '
-          f'и балансом в настоящий момент {Vasya.balance} рублей,\n'
-          f'Хочет по окончанию отчетного периода иметь не менее '
-          f'{Vasya.wish_to_save} рублей')
+    user = user__builder.person
+    print(user.__dict__)
+    user.income.append(200)
+    print(user.__dict__)
