@@ -17,6 +17,10 @@ class Account:
     def set_income(self, income):
         self.income.append(income)
 
+    def annul_income(self):
+        self.income.clear()
+        return f'list of income has no more values'
+
     # def __str__(self):
     #     return f'{self.user} {self.account} {self.expenses} {self.income}'
     #
@@ -35,7 +39,10 @@ class Account:
 
 if __name__ == '__main__':
     a = Account(User('Mike'))
-    print(a.user, a.income)
+    a.set_income(1000)
+    print(a)
+    a.annul_income()
+    print(a)
     # a = User('Petya')
     # a.set_income(1000)
     # print(a)
