@@ -24,6 +24,9 @@ class Category:
     def __str__(self):
         return f'{self.__balance}'
 
+    def __add__(self, other):
+        pass
+
     def get_val(self):
         return f'{self.__balance}'
 
