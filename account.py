@@ -8,10 +8,13 @@ class Account:
     def __init__(self, customer):
         self.user = customer.name
         self.income = []
+        # self.title =
+        self.category = []
+        self.expenses = []
 
     def __str__(self):
         if self.income.__len__() > 0:
-            return f'{self.user} {self.income[0]}'
+            return f'{self.user} {self.income[0]} {self.category} {self.expenses}'
         return self.user
 
     def set_income(self, income):
@@ -20,6 +23,10 @@ class Account:
     def annul_income(self):
         self.income.clear()
         return f'list of income has no more values'
+
+    def set_expense(self, category, expense):
+        self.category = category.title
+        self.expenses = expense
 
     # def __str__(self):
     #     return f'{self.user} {self.account} {self.expenses} {self.income}'
@@ -39,10 +46,13 @@ class Account:
 
 if __name__ == '__main__':
     a = Account(User('Mike'))
+    category = Category('products')
     a.set_income(1000)
+    a.set_expense(category, 2000)
     print(a)
     a.annul_income()
-    print(a)
+    # b = getattr(a.__class__, 'income', 'ops')
+    # print(b)
     # a = User('Petya')
     # a.set_income(1000)
     # print(a)
