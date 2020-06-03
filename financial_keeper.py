@@ -1,8 +1,8 @@
 class User:
     def __init__(self, name):
         self.name = name
-        self.expense_account = Bank.expense_account
         self.income_account = Bank.income_account
+        self.expense_account = Bank.expense_account
 
     def __str__(self):
         return f'{self.name}'
@@ -22,19 +22,13 @@ class Bank:
 
 
 class Category:
-    class Category:
-        def __init__(self, title):
-            self.title = title
-            self.expense_account = Bank.expense_account
-            self.income_account = Bank.income_account
+    def __init__(self, title):
+        self.title = title
+        self.income_account = Bank.income_account
+        self.expense_account = Bank.expense_account
 
-        def __str__(self):
-            return f'{self.title}'
-    # def __init__(self):
-    #     self.account = []
-    #
-    # def __str__(self):
-    #     return self.account
+    def __str__(self):
+        return f'{self.title} {sum(self.income_account)} {sum(self.expense_account)} '
 
 
 if __name__ == '__main__':
@@ -42,4 +36,6 @@ if __name__ == '__main__':
     print(user)
     user.set_income(2000)
     user.set_expense(1000)
-
+    user.set_expense(3000)
+    products = Category('products')
+    print(products)
