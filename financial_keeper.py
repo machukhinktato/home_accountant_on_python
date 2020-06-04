@@ -39,7 +39,7 @@ class Category:
         pass
 
     def get_val(self):
-        return f'{self.__balance}'
+        return f'{self._balance}'
 
     def set_val(self, value):
         if not isinstance(value, (int, float)):
@@ -62,5 +62,5 @@ if __name__ == '__main__':
     user.category[2].set_val(5000)
     user.bind_category(robbed)
     user.category[3].set_val(5000)
-    print(user.category[2])
-    show_cat_val(user.category)
+    for val in user.category[1:]:
+        print(val.get_val())
