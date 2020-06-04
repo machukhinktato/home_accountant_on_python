@@ -9,14 +9,24 @@ class User:
         return f'{self.name}'
 
 
+def show_cat_val(category):
+    if category.main_category == 'expense':
+        print(category.main_category, category._balance)
+        return
+    return print(category.main_category, category._balance)
+
+def show_user_streams(User):
+    pass
+
+
 class Category:
-    def __init__(self, title, balance, type_of='expense'):
+    def __init__(self, title, type_of='expense', balance=0):
         self.title = title
-        self.__balance = balance
         self.main_category = type_of
+        self._balance = balance
 
     def __str__(self):
-        return f'{self.title} {self.__balance} {self.main_category}'
+        return f'{self.main_category} {self.title} {self._balance} '
 
     def __add__(self, other):
         pass
@@ -27,12 +37,15 @@ class Category:
     def set_val(self, value):
         if not isinstance(value, (int, float)):
             raise ValueError('balance must have numeric symbols')
-        self.__balance += value
-        return self.__balance
+        self._balance += value
+        return self._balance
 
     def annul_val(self):
-        self.__balance = 0
+        self._balance = 0
 
 
 if __name__ == '__main__':
     user = User('Misha')
+    products = Category('products')
+    show_cat_val(products)
+    print(user)
