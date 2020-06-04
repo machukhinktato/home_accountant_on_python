@@ -1,12 +1,18 @@
 class User:
-    def __init__(self, name):
+    def __init__(self, name, category=None):
         self.name = name
-        self.category = {}
+        self.category = [category]
         self.balance = []
         self.account = {}
 
     def __str__(self):
-        return f'{self.name}'
+        return f'{self.name} {self.category[1:]}'
+
+    def bind_category(self, category):
+        if not category in self.category:
+            self.category.append(category)
+        else:
+            print('category already exists')
 
 
 def show_cat_val(category):
@@ -15,13 +21,14 @@ def show_cat_val(category):
         return
     return print(category.main_category, category._balance)
 
+
 def show_user_streams(User):
     pass
 
 
 class Category:
     def __init__(self, title, type_of='expense', balance=0):
-        self.title = title
+        self.title = title.lower()
         self.main_category = type_of
         self._balance = balance
 
@@ -46,6 +53,11 @@ class Category:
 
 if __name__ == '__main__':
     user = User('Misha')
+    salary = Category('salary', 'income')
     products = Category('products')
-    show_cat_val(products)
-    print(user)
+    user.bind_category(salary)
+    user.category[1].set_val(10000)
+    user.bind_category(products)
+    user.category[2].set_val(5000)
+    print(user.category[2])
+    show_cat_val(user.category[1])
