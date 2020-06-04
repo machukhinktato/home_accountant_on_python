@@ -6,24 +6,28 @@ class User:
         self.account = {}
 
     def __str__(self):
-        return f'{self.name} {self.category[1:]}'
+        return f'{self.name} {self.category[:]}'
 
     def bind_category(self, category):
         if not category in self.category:
             self.category.append(category)
         else:
             print('category already exists')
+        if None in self.category:
+            self.category.pop(0)
 
 
-# def show_cat_val(category):
-#     if category.main_category in category.main_category:
-#         for expense in category.main_category:
-#             return print(expense)
-#     return print(category.main_category, category._balance)
-#
-#
-# def show_user_streams(User):
-#     pass
+def show_cat_val(user):
+    for val in user.category[:]:
+            print(val)
+
+def show_income_sum(user):
+    income_list = user.category[:]
+    sum_list = []
+    for value in income_list:
+        if value.main_category == 'income':
+            sum_list.append(value._balance)
+    return sum(sum_list)
 
 
 class Category:
@@ -57,10 +61,10 @@ if __name__ == '__main__':
     robbed = Category('robbed', 'income')
     products = Category('products')
     user.bind_category(salary)
-    user.category[1].set_val(10000)
+    user.category[0].set_val(10000)
     user.bind_category(products)
-    user.category[2].set_val(5000)
+    user.category[1].set_val(5000)
     user.bind_category(robbed)
-    user.category[3].set_val(5000)
-    for val in user.category[1:]:
-        print(val.get_val())
+    user.category[2].set_val(5000)
+    print(show_income_sum(user))
+    # print(type(False))
