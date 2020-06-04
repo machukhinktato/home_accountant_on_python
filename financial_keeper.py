@@ -1,6 +1,4 @@
 class User:
-    banana = {}
-
     def __init__(self, name):
         self.name = name
         self.category = {}
@@ -10,9 +8,6 @@ class User:
     def __str__(self):
         return f'{self.name}'
 
-    def create_expense(self, name, value):
-        self.banana.update({name: value})
-        return self.banana
 
 
 class Category:
@@ -22,7 +17,7 @@ class Category:
         self.main_category = type_of
 
     def __str__(self):
-        return f'{self.__balance}'
+        return f'{self.name} {self.__balance} {self.main_category}'
 
     def __add__(self, other):
         pass
@@ -42,5 +37,7 @@ class Category:
 
 if __name__ == '__main__':
     user = User('Misha')
-    new_expense = Category('products', 1000, 'income')
-    print(new_expense.main_category)
+    products = Category('products', 1000, 'income')
+    print(products)
+    products.del_val()
+    print(products)
