@@ -14,6 +14,14 @@ class User:
         if None in self.category:
             self.category.pop(0)
 
+    def show_income_sum(self):
+        income_list = self.category[:]
+        sum_list = []
+        for value in income_list:
+            if value.main_category == 'income':
+                sum_list.append(value._balance)
+        return print(sum(sum_list))
+
     def show_balance(self):
         income = show_income_sum(self)
         expense = show_expense_sum(self)
@@ -52,13 +60,7 @@ class Category:
         self._balance = 0
 
 
-def show_income_sum(user):
-    income_list = user.category[:]
-    sum_list = []
-    for value in income_list:
-        if value.main_category == 'income':
-            sum_list.append(value._balance)
-    return sum(sum_list)
+
 
 
 def show_expense_sum(user):
@@ -83,4 +85,4 @@ if __name__ == '__main__':
     user.bind_category(robbery)
     user.category[2].set_val(5000)
     user.show_financial_streams()
-    # print(type(False))
+    user.show_income_sum()
