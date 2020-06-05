@@ -48,10 +48,11 @@ class User:
         user_category._balance += value
         return print(user_category._balance)
 
-        # if category in self.category[:]:
-        #     if category == self.category[:]:
-        #         self.category.__class__._balabce.append(val)
-        # return print(self.__obj__.show_balance())
+    def get_val(self, user_category):
+        return user_category.get_val()
+        # if user_category in self.category[:]:
+        #     if user_category == self.category:
+        #         print(user_category._balance)
 
 
 class Category:
@@ -67,7 +68,7 @@ class Category:
         pass
 
     def get_val(self):
-        return f'{self._balance}'
+        return print(self._balance)
 
     def set_val(self, value):
         if not isinstance(value, (int, float)):
@@ -96,3 +97,4 @@ if __name__ == '__main__':
     user.show_expense_sum()
     user.set_val(user.category[1], 1000)
     user.show_financial_streams()
+    user.get_val(user.category[2])
