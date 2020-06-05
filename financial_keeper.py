@@ -70,12 +70,6 @@ def show_expense_sum(user):
     return sum(sum_list)
 
 
-def show_financial_streams(user):
-    for val in user.category[:]:
-        print(val)
-    return val
-
-
 if __name__ == '__main__':
     user = User('Misha')
     salary = Category('salary', 'income')
