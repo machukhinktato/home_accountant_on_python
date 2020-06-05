@@ -2,8 +2,6 @@ class User:
     def __init__(self, name, category=None):
         self.name = name
         self.category = [category]
-        # self.balance = []
-        # self.account = {}
 
     def __str__(self):
         return f'{self.name} {self.category[:]}'
@@ -21,13 +19,12 @@ class User:
         expense = show_expense_sum(self)
         res = income - expense
         print(res)
-        # if income > expense:
-        #     res = income - expense
-        #     print(res)
-        # else:
-        #     res = expense - income
-        #     print(res)
         return res
+
+    def show_financial_streams(self):
+        for val in self.category[:]:
+            print(val)
+        return val
 
 
 class Category:
@@ -91,5 +88,5 @@ if __name__ == '__main__':
     user.category[1].set_val(15000)
     user.bind_category(robbery)
     user.category[2].set_val(5000)
-    user.show_balance()
+    user.show_financial_streams()
     # print(type(False))
