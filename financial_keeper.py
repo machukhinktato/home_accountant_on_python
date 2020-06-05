@@ -42,6 +42,17 @@ class User:
             print(val)
         return val
 
+    def set_val(self, user_category, value):
+        if not isinstance(value, (int, float)):
+            raise ValueError('balance must have numeric symbols')
+        user_category._balance += value
+        return print(user_category._balance)
+
+        # if category in self.category[:]:
+        #     if category == self.category[:]:
+        #         self.category.__class__._balabce.append(val)
+        # return print(self.__obj__.show_balance())
+
 
 class Category:
     def __init__(self, title, type_of='expense', balance=0):
@@ -83,3 +94,5 @@ if __name__ == '__main__':
     user.show_financial_streams()
     user.show_income_sum()
     user.show_expense_sum()
+    user.set_val(user.category[1], 1000)
+    user.show_financial_streams()
