@@ -2,8 +2,8 @@ class User:
     def __init__(self, name, category=None):
         self.name = name
         self.category = [category]
-        self.balance = []
-        self.account = {}
+        # self.balance = []
+        # self.account = {}
 
     def __str__(self):
         return f'{self.name} {self.category[:]}'
@@ -16,18 +16,18 @@ class User:
         if None in self.category:
             self.category.pop(0)
 
-
-def show_cat_val(user):
-    for val in user.category[:]:
-            print(val)
-
-def show_income_sum(user):
-    income_list = user.category[:]
-    sum_list = []
-    for value in income_list:
-        if value.main_category == 'income':
-            sum_list.append(value._balance)
-    return sum(sum_list)
+    def show_balance(self):
+        income = show_income_sum(self)
+        expense = show_expense_sum(self)
+        res = income - expense
+        print(res)
+        # if income > expense:
+        #     res = income - expense
+        #     print(res)
+        # else:
+        #     res = expense - income
+        #     print(res)
+        return res
 
 
 class Category:
@@ -55,16 +55,41 @@ class Category:
         self._balance = 0
 
 
+def show_income_sum(user):
+    income_list = user.category[:]
+    sum_list = []
+    for value in income_list:
+        if value.main_category == 'income':
+            sum_list.append(value._balance)
+    return sum(sum_list)
+
+
+def show_expense_sum(user):
+    expense_list = user.category[:]
+    sum_list = []
+    for value in expense_list:
+        if value.main_category == 'expense':
+            sum_list.append(value._balance)
+    return sum(sum_list)
+
+
+def show_financial_streams(user):
+    for val in user.category[:]:
+        print(val)
+    return val
+
+
 if __name__ == '__main__':
     user = User('Misha')
     salary = Category('salary', 'income')
-    robbed = Category('robbed', 'income')
+    robbery = Category('robbery', 'income')
     products = Category('products')
     user.bind_category(salary)
     user.category[0].set_val(10000)
     user.bind_category(products)
     user.category[1].set_val(5000)
-    user.bind_category(robbed)
+    user.category[1].set_val(15000)
+    user.bind_category(robbery)
     user.category[2].set_val(5000)
-    print(show_income_sum(user))
+    user.show_balance()
     # print(type(False))
