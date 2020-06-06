@@ -50,9 +50,6 @@ class User:
 
     def get_val(self, user_category):
         return user_category.get_val()
-        # if user_category in self.category[:]:
-        #     if user_category == self.category:
-        #         print(user_category._balance)
 
 
 class Category:
