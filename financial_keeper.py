@@ -28,7 +28,7 @@ class User:
         for value in expense_list:
             if value.main_category == 'expense':
                 sum_list.append(value._balance)
-                return print(value.main_category, sum(sum_list))
+        return print(value.main_category, sum(sum_list))
 
     def show_balance(self):
         income = show_income_sum(self)
@@ -39,8 +39,7 @@ class User:
 
     def show_financial_streams(self):
         for val in self.category[:]:
-            print(val)
-        return val
+            print(val.title, val._balance)
 
 
 class Category:
@@ -54,7 +53,6 @@ class Category:
 
     def __repr__(self):
         return f'{self.main_category} {self.title} {self._balance} '
-
 
     def __add__(self, other):
         pass
@@ -78,21 +76,25 @@ if __name__ == '__main__':
     salary = Category('salary', 'income')
     robbery = Category('robbery', 'income')
     products = Category('products')
-    donate = Category('donate')
+    donated = Category('donated')
     user.bind_category(salary)
     user.category[0].set_val(10000)
     user.bind_category(products)
     user.category[1].set_val(5000)
     user.category[1].set_val(15000)
     user.bind_category(robbery)
-    user.bind_category(donate)
+    user.bind_category(donated)
     user.category[2].set_val(5000)
     user.category[3].set_val(10)
     user.show_financial_streams()
+    print('_' * 30)
     user.show_income_sum()
+    print('_' * 30)
     user.show_expense_sum()
+    print('_' * 30)
     user.category[1].set_val(1000)
     user.show_financial_streams()
+    print('_' * 30)
     user.category[2].get_val()
     user.category[2].annul_val()
     user.category[2].set_val(3000)
