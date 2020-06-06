@@ -51,6 +51,10 @@ class User:
     def get_val(self, user_category):
         return user_category.get_val()
 
+    # def annul_val(self):
+    #     self._balance = 0
+    #     return self._balance
+
 
 class Category:
     def __init__(self, title, type_of='expense', balance=0):
@@ -75,6 +79,7 @@ class Category:
 
     def annul_val(self):
         self._balance = 0
+        return print(self.title, self._balance)
 
 
 if __name__ == '__main__':
@@ -95,3 +100,4 @@ if __name__ == '__main__':
     user.set_val(user.category[1], 1000)
     user.show_financial_streams()
     user.get_val(user.category[2])
+    user.category[2].annul_val()
