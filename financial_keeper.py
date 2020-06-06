@@ -20,7 +20,7 @@ class User:
         for value in income_list:
             if value.main_category == 'income':
                 sum_list.append(value._balance)
-        return print(sum(sum_list))
+        return print(value.main_category, sum(sum_list))
 
     def show_expense_sum(self):
         expense_list = self.category[:]
@@ -28,7 +28,7 @@ class User:
         for value in expense_list:
             if value.main_category == 'expense':
                 sum_list.append(value._balance)
-        return print(sum(sum_list))
+                return print(value.main_category, sum(sum_list))
 
     def show_balance(self):
         income = show_income_sum(self)
@@ -65,11 +65,15 @@ class Category:
     def __str__(self):
         return f'{self.main_category} {self.title} {self._balance} '
 
+    def __repr__(self):
+        return f'{self.main_category} {self.title} {self._balance} '
+
+
     def __add__(self, other):
         pass
 
     def get_val(self):
-        return print(self._balance)
+        return print(self.title, self._balance)
 
     def set_val(self, value):
         if not isinstance(value, (int, float)):
@@ -99,8 +103,8 @@ if __name__ == '__main__':
     user.show_expense_sum()
     user.category[1].set_val(1000)
     user.show_financial_streams()
-    # user.get_val(user.category[2])
     user.category[2].get_val()
     user.category[2].annul_val()
     user.category[2].set_val(3000)
     user.category[2].get_val()
+    print(user.category[:])
