@@ -42,14 +42,14 @@ class User:
             print(val)
         return val
 
-    def set_val(self, user_category, value):
-        if not isinstance(value, (int, float)):
-            raise ValueError('balance must have numeric symbols')
-        user_category._balance += value
-        return print(user_category._balance)
-
-    def get_val(self, user_category):
-        return user_category.get_val()
+    # def set_val(self, user_category, value):
+    #     if not isinstance(value, (int, float)):
+    #         raise ValueError('balance must have numeric symbols')
+    #     user_category._balance += value
+    #     return print(user_category.title, user_category._balance)
+    #
+    # def get_val(self, user_category):
+    #     return user_category.get_val()
 
     # def annul_val(self):
     #     self._balance = 0
@@ -97,7 +97,10 @@ if __name__ == '__main__':
     user.show_financial_streams()
     user.show_income_sum()
     user.show_expense_sum()
-    user.set_val(user.category[1], 1000)
+    user.category[1].set_val(1000)
     user.show_financial_streams()
-    user.get_val(user.category[2])
+    # user.get_val(user.category[2])
+    user.category[2].get_val()
     user.category[2].annul_val()
+    user.category[2].set_val(3000)
+    user.category[2].get_val()
