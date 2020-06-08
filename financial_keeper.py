@@ -1,7 +1,7 @@
 class User:
-    def __init__(self, name, category=None):
+    def __init__(self, name):
         self.name = name
-        self.category = [category]
+        self.category = []
 
     def __str__(self):
         return f'{self.name} {self.category[:]}'
@@ -11,8 +11,11 @@ class User:
             self.category.append(category)
         else:
             print('category already exists')
-        if None in self.category:
-            self.category.pop(0)
+        # if None in self.category:
+        #     self.category.pop(0)
+
+    # def show_sum(self, inc_or_exp):
+    #
 
     def show_income_sum(self):
         income_list = self.category[:]
