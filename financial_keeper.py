@@ -1,3 +1,5 @@
+import re
+
 class User:
     def __init__(self, name):
         self.name = name
@@ -7,15 +9,8 @@ class User:
         return f'{self.name} {self.category[:]}'
 
     def bind_category(self, category):
-        if not category in self.category:
             self.category.append(category)
-        else:
-            print('category already exists')
-        # if None in self.category:
-        #     self.category.pop(0)
 
-    # def show_sum(self, inc_or_exp):
-    #
 
     def show_income_sum(self):
         income_list = self.category[:]
@@ -117,3 +112,4 @@ if __name__ == '__main__':
     user.category[2].set_val(3000)
     user.category[2].get_val()
     print(user.category[:])
+    products = Category('products')
