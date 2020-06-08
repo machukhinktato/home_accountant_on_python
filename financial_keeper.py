@@ -33,7 +33,7 @@ class User:
         ttl_income = self.show_sum('income')
         ttl_expense = self.show_sum('expense')
         ttl = ttl_income - ttl_expense
-        return ttl
+        return f'{ttl}'
 
 
     def show_financial_streams(self):
@@ -89,9 +89,9 @@ if __name__ == '__main__':
     print('_' * 30)
     print(user.show_income_sum())
     print('_' * 30)
-    user.show_expense_sum()
+    print(user.show_expense_sum())
     print('_' * 30)
-    user.show_balance()
+    print(user.show_balance())
     print('_' * 30)
     user.category[1].set_val(1000)
     user.show_financial_streams()
