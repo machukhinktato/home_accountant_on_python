@@ -1,5 +1,6 @@
 import re
 
+
 class User:
     def __init__(self, name):
         self.name = name
@@ -9,42 +10,28 @@ class User:
         return f'{self.name} {self.category[:]}'
 
     def bind_category(self, category):
-            self.category.append(category)
+        self.category.append(category)
 
+    def show_sum(self, classification):
+        sum_list = self.category[:]
+        calculator = []
+        for value in sum_list:
+            if value.main_category == classification:
+                calculator.append(value._balance)
+                res = int(sum(calculator))
+        return res
 
     def show_income_sum(self):
-        income_list = self.category[:]
-        sum_list = []
-        for value in income_list:
-            if value.main_category == 'income':
-                sum_list.append(value._balance)
-                res = int(sum(sum_list))
-        print('total income', res)
-        return res
+        return self.show_sum('income')
 
     def show_expense_sum(self):
-        expense_list = self.category[:]
-        sum_list = []
-        for value in expense_list:
-            if value.main_category == 'expense':
-                sum_list.append(value._balance)
-                res = int(sum(sum_list))
-        print('total expense', res)
-        return res
+        return self.show_sum('expense')
 
     def show_balance(self):
-        total_list = self.category[:]
-        income_list = []
-        expanse_list = []
-        for value in total_list:
-            if value.main_category == 'income':
-                income_list.append(value._balance)
-                ttl_income = int(sum(income_list))
-            if value.main_category == 'expense':
-                expanse_list.append(value._balance)
-                ttl_expense = int(sum(expanse_list))
+        ttl_income = self.show_income_sum()
+        ttl_expense = self.show_expense_sum()
         ttl = ttl_income - ttl_expense
-        print('balance: ', ttl)
+        return ttl
 
 
     def show_financial_streams(self):
@@ -98,7 +85,7 @@ if __name__ == '__main__':
     user.category[3].set_val(10)
     user.show_financial_streams()
     print('_' * 30)
-    user.show_income_sum()
+    print(user.show_income_sum())
     print('_' * 30)
     user.show_expense_sum()
     print('_' * 30)
