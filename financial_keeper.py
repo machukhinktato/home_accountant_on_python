@@ -22,14 +22,16 @@ class User:
         return res
 
     def show_income_sum(self):
-        return self.show_sum('income')
+        income = self.show_sum('income')
+        return f'income {income}'
 
     def show_expense_sum(self):
-        return self.show_sum('expense')
+        expense = self.show_sum('expense')
+        return f'expense {expense}'
 
     def show_balance(self):
-        ttl_income = self.show_income_sum()
-        ttl_expense = self.show_expense_sum()
+        ttl_income = self.show_sum('income')
+        ttl_expense = self.show_sum('expense')
         ttl = ttl_income - ttl_expense
         return ttl
 
