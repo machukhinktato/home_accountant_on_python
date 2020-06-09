@@ -67,7 +67,7 @@ class FinancialMapper:
 
 class Category:
     def __init__(self, classification, name, value):
-        self.direction = classification
+        self.classification = classification
         self.name = name
         self.value = value
 
@@ -75,3 +75,6 @@ class Category:
 financial_mapper = FinancialMapper(connection)
 category_1 = financial_mapper.find_by_id(1)
 print(category_1.__dict__)
+salary = Category('expense', 'salary', 0)
+banana = financial_mapper.insert(salary)
+print(banana)
