@@ -23,26 +23,22 @@ class DbDeleteException(Exception):
         super().__init__(f'Db delete error: {message}')
 
 
-class PersonMapper:
-    """
-    Паттерн DATA MAPPER
-    Слой преобразования данных
-    """
+class FinancialMapper:
 
     def __init__(self, connection):
         self.connection = connection
         self.cursor = connection.cursor()
 
-    def find_by_id(self, id_person):
+    def find_by_id(self, name):
         #
         # statement = f"SELECT IDPERSON, FIRSTNAME, LASTNAME \
         #               FROM PERSON WHERE IDPERSON='{id_person}'"
         #
         # self.cursor.execute(statement)
 
-        statement = f"SELECT IDPERSON, FIRSTNAME, LASTNAME FROM PERSON WHERE IDPERSON=?"
+        statement = f"SELECT category_id, name, value FROM category WHERE name='?'"
 
-        self.cursor.execute(statement, (id_person,))
+        self.cursor.execute(statement, (name,))
         result = self.cursor.fetchall()
         if result:
             return Person(*result[0])

@@ -10,16 +10,17 @@ command.execute("""CREATE TABLE IF NOT EXISTS category (
 ) """)
 db.commit()
 
+category_id = 1
 direction = 'expense'
 name = 'products'
 value = 10000
 
 
-command.execute("SELECT type FROM category")
+command.execute("SELECT direction FROM category")
 if command.fetchone() is None:
     command.execute(
-        "INSERT INTO category VALUES (?, ?, ?)",
-        (direction, name, value))
+        "INSERT INTO category VALUES (?, ?, ?, ?)",
+        (category_id ,direction, name, value))
     db.commit()
 else:
     print('wow')
