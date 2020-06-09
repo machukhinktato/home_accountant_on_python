@@ -80,11 +80,17 @@ class PersonMapper:
             raise DbDeleteException(e.args)
 
 
-class Person:
-    def __init__(self, id_person, first_name, last_name):
-        self.id_person = id_person
-        self.last_name = last_name
-        self.first_name = first_name
+# class Person:
+#     def __init__(self, id_person, first_name, last_name):
+#         self.id_person = id_person
+#         self.last_name = last_name
+#         self.first_name = first_name
+
+class Category:
+    def __init__(self, category_id, direction, name, value):
+        self.direction = direction
+        self.name = name
+        self.value = value
 
 
 person_mapper = PersonMapper(connection)
