@@ -30,26 +30,16 @@ class FinancialMapper:
         self.cursor = connection.cursor()
 
     def find_by_id(self, name):
-        #
-        # statement = f"SELECT IDPERSON, FIRSTNAME, LASTNAME \
-        #               FROM PERSON WHERE IDPERSON='{id_person}'"
-        #
-        # self.cursor.execute(statement)
-
         statement = f"SELECT category_id, name, value FROM category WHERE name='?'"
 
         self.cursor.execute(statement, (name,))
         result = self.cursor.fetchall()
         if result:
-            return Person(*result[0])
+            return Category(*result[0])
         else:
-            raise RecordNotFoundException(f'record with id={id_person} not found')
+            raise RecordNotFoundException(f'record with id={name} not found')
 
     def insert(self, person):
-        # statement = f"INSERT INTO PERSON (FIRSTNAME, LASTNAME) VALUES \
-        #               ('{person.first_name}', '{person.last_name}')"
-        # self.cursor.execute(statement)
-
         statement = f"INSERT INTO PERSON (FIRSTNAME, LASTNAME) VALUES \
                               (?, ?)"
         self.cursor.execute(statement, (person.first_name, person.last_name))
