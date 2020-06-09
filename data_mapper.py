@@ -39,26 +39,25 @@ class FinancialMapper:
         else:
             raise RecordNotFoundException(f'record with id={name} not found')
 
-    def insert(self, person):
-        statement = f"INSERT INTO PERSON (FIRSTNAME, LASTNAME) VALUES \
-                              (?, ?)"
-        self.cursor.execute(statement, (person.first_name, person.last_name))
+    def insert(self, _category):
+        statement = f"INSERT INTO category (direction, name, value) VALUES \
+                              (?, ?, ?)"
+        self.cursor.execute(statement, (_category.direction, _category.name, _category.value))
         try:
             self.connection.commit()
         except Exception as e:
             raise DbCommitException(e.args)
 
-    def update(self, person):
-        statement = f"UPDATE PERSON SET FIRSTNAME='{person.first_name}', LASTNAME='{person.last_name}' \
-                      WHERE IDPERSON='{person.id_person}'"
+    def update(self, _category):
+        statement = f"UPDATE category SET value='{_category.value}' WHERE name='{_category.name}'"
         self.cursor.execute(statement)
         try:
             self.connection.commit()
         except Exception as e:
             raise DbUpdateException(e.args)
 
-    def delete(self, person):
-        statement = f"DELETE FROM PERSON WHERE IDPERSON='{person.id_person}'"
+    def delete(self, _category):
+        statement = f"DELETE FROM category WHERE name='{_category.name}'"
         self.cursor.execute(statement)
         try:
             self.connection.commit()
@@ -66,19 +65,13 @@ class FinancialMapper:
             raise DbDeleteException(e.args)
 
 
-# class Person:
-#     def __init__(self, id_person, first_name, last_name):
-#         self.id_person = id_person
-#         self.last_name = last_name
-#         self.first_name = first_name
-
 class Category:
-    def __init__(self, category_id, direction, name, value):
+    def __init__(self, direction, name, value):
         self.direction = direction
         self.name = name
         self.value = value
 
 
-person_mapper = PersonMapper(connection)
-person_1 = person_mapper.find_by_id(1)
-print(person_1.__dict__)
+financial_mapper = FinancialMapper(connection)
+category_1 = financial_mapper.find_by_id('products')
+print(category_1.__dict__)
