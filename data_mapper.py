@@ -48,6 +48,8 @@ class FinancialMapper:
         except Exception as e:
             raise DbCommitException(e.args)
 
+        return f'insert successfully done'
+
     def update(self, _category):
         statement = f"UPDATE category SET value='{_category.value}' WHERE name='{_category.name}'"
         self.cursor.execute(statement)
@@ -76,5 +78,6 @@ financial_mapper = FinancialMapper(connection)
 category_1 = financial_mapper.find_by_id(1)
 print(category_1.__dict__)
 salary = Category('expense', 'salary', 0)
-banana = financial_mapper.insert(salary)
-print(banana)
+financial_mapper.insert(salary)
+banana = financial_mapper.find_by_id(2)
+print(banana.__dict__)

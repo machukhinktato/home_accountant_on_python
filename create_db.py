@@ -3,7 +3,7 @@ import sqlite3
 db = sqlite3.connect('fin_keeper.db')
 command = db.cursor()
 command.execute("""CREATE TABLE IF NOT EXISTS category (
-    category_id PRIMARY KEY, 
+    category_id INTEGER NOT NULL PRIMARY KEY , 
     classification TEXT,
     name TEXT,
     value INTEGER
@@ -11,16 +11,16 @@ command.execute("""CREATE TABLE IF NOT EXISTS category (
 db.commit()
 
 category_id = 1
-direction = 'expense'
+classification = 'expense'
 name = 'products'
 value = 10000
 
 
-command.execute("SELECT classification FROM category")
+command.execute("SELECT category_id FROM category")
 if command.fetchone() is None:
     command.execute(
         "INSERT INTO category VALUES (?, ?, ?, ?)",
-        (category_id ,direction, name, value))
+        (category_id, classification, name, value))
     db.commit()
 else:
     print('wow')
