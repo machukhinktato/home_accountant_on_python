@@ -30,7 +30,7 @@ class FinancialMapper:
         self.cursor = connection.cursor()
 
     def find_by_id(self, name):
-        statement = f"SELECT category_id, name, value FROM category WHERE name='?'"
+        statement = f"SELECT classification, name, value FROM category WHERE category_id='?'"
 
         self.cursor.execute(statement, (name,))
         result = self.cursor.fetchall()
@@ -40,9 +40,9 @@ class FinancialMapper:
             raise RecordNotFoundException(f'record with id={name} not found')
 
     def insert(self, _category):
-        statement = f"INSERT INTO category (direction, name, value) VALUES \
+        statement = f"INSERT INTO category (classification, name, value) VALUES \
                               (?, ?, ?)"
-        self.cursor.execute(statement, (_category.direction, _category.name, _category.value))
+        self.cursor.execute(statement, (_category.classification, _category.name, _category.value))
         try:
             self.connection.commit()
         except Exception as e:
@@ -66,12 +66,12 @@ class FinancialMapper:
 
 
 class Category:
-    def __init__(self, direction, name, value):
-        self.direction = direction
+    def __init__(self, classification, name, value):
+        self.direction = classification
         self.name = name
         self.value = value
 
 
 financial_mapper = FinancialMapper(connection)
-category_1 = financial_mapper.find_by_id('products')
+category_1 = financial_mapper.find_by_id(0)
 print(category_1.__dict__)
