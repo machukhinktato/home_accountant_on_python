@@ -77,9 +77,8 @@ class Category:
         return print(self.name, self.value)
 
     def insert_into_db(self):
-        financial_mapper = FinancialMapper(connection)
+        # financial_mapper = FinancialMapper(connection)
         financial_mapper.insert(self)
-        return financial_mapper.find_by_id()
 
 
 if __name__ == '__main__':
