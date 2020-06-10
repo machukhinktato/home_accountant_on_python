@@ -30,7 +30,7 @@ class FinancialMapper:
         self.cursor = connection.cursor()
 
     def find_by_id(self, name):
-        statement = f"SELECT classification, name, value FROM category WHERE category_id=?"
+        statement = f"SELECT classification, name, value FROM category WHERE name=?"
 
         self.cursor.execute(statement, (name,))
         result = self.cursor.fetchall()
@@ -59,7 +59,7 @@ class FinancialMapper:
             raise DbUpdateException(e.args)
 
     def delete(self, _category):
-        statement = f"DELETE FROM category WHERE name='{_category.name}'"
+        statement = f"DELETE FROM category WHERE name=?"
         self.cursor.execute(statement)
         try:
             self.connection.commit()
@@ -75,9 +75,10 @@ class Category:
 
 
 financial_mapper = FinancialMapper(connection)
-category_1 = financial_mapper.find_by_id(1)
-print(category_1.__dict__)
+# category_1 = financial_mapper.find_by_id(1)
+# print(category_1.__dict__)
 salary = Category('expense', 'salary', 0)
 financial_mapper.insert(salary)
-banana = financial_mapper.find_by_id(2)
+banana = financial_mapper.find_by_id('donated')
+financial_mapper.delete('donated')
 print(banana.__dict__)

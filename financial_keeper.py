@@ -1,4 +1,4 @@
-import re
+from data_mapper import *
 
 
 class User:
@@ -23,8 +23,8 @@ class User:
         sum_list = self.category[:]
         calculator = []
         for value in sum_list:
-            if value.main_category == classification:
-                calculator.append(value._balance)
+            if value.classification == classification:
+                calculator.append(value.value)
                 res = int(sum(calculator))
         return res
 
@@ -45,36 +45,41 @@ class User:
 
     def show_financial_streams(self):
         for val in self.category[:]:
-            print(val.title, val._balance)
+            print(val.title, val.value)
 
 
 class Category:
-    def __init__(self, title, type_of='expense', balance=0):
-        self.title = title.lower()
-        self.main_category = type_of
-        self._balance = balance
+    def __init__(self, name, classification='expense', balance=0):
+        self.name = name.lower()
+        self.classification = classification
+        self.value = balance
 
     def __str__(self):
-        return f'{self.main_category} {self.title} {self._balance} '
+        return f'{self.classification} {self.name} {self.value} '
 
     def __repr__(self):
-        return f'{self.main_category} {self.title} {self._balance} '
+        return f'{self.classification} {self.name} {self.value} '
 
     def __add__(self, other):
         pass
 
     def get_val(self):
-        return print(self.title, self._balance)
+        return print(self.name, self.value)
 
     def set_val(self, value):
         if not isinstance(value, (int, float)):
             raise ValueError('balance must have numeric symbols')
-        self._balance += value
-        return self._balance
+        self.value += value
+        return self.value
 
     def annul_val(self):
-        self._balance = 0
-        return print(self.title, self._balance)
+        self.value = 0
+        return print(self.name, self.value)
+
+    def insert_into_db(self):
+        financial_mapper = FinancialMapper(connection)
+        financial_mapper.insert(self)
+        return financial_mapper.find_by_id()
 
 
 if __name__ == '__main__':
@@ -83,9 +88,12 @@ if __name__ == '__main__':
     robbery = Category('robbery', 'income')
     products = Category('products')
     donated = Category('donated')
+    print(donated)
+    donated.insert_into_db()
     user.bind_category(salary)
-    user.categories(salary).set_val(10000)
-    print(user.categories(salary).get_val())
+
+    # user.categories(salary).set_val(10000)
+    # print(user.categories(salary).get_val())
     # user.category[0].set_val(10000)
     # user.bind_category(products)
     # user.category[1].set_val(5000)
