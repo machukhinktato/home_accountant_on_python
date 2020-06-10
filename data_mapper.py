@@ -50,9 +50,11 @@ class FinancialMapper:
 
         return f'insert successfully done'
 
-    def update(self, _category):
-        statement = f"UPDATE category SET value='{_category.value}' WHERE name='{_category.name}'"
-        self.cursor.execute(statement)
+    def update(self, _category, name, value):
+        _category.name = name
+        _category.value = value
+        statement = f"UPDATE category SET value=? WHERE name=?"
+        self.cursor.execute(statement, (_category.value, _category.name))
         try:
             self.connection.commit()
         except Exception as e:
