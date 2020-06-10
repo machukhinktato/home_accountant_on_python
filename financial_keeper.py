@@ -47,7 +47,7 @@ class User:
             print(val.title, val.value)
 
 
-class FinnanceOperator:
+class FinancialOperator:
     def __init__(self, name, classification='expense', balance=0):
         self.name = name.lower()
         self.classification = classification
@@ -79,17 +79,18 @@ class FinnanceOperator:
         financial_mapper.insert(self)
 
     def delete_from_db(self):
-        financial_mapper.insert(self)
+        financial_mapper.delete(self)
 
 
 if __name__ == '__main__':
     user = User('Misha')
-    salary = FinnanceOperator('salary', 'income')
-    robbery = FinnanceOperator('robbery', 'income')
-    products = FinnanceOperator('products')
-    donated = FinnanceOperator('donated')
+    salary = FinancialOperator('salary', 'income')
+    robbery = FinancialOperator('robbery', 'income')
+    products = FinancialOperator('products')
+    donated = FinancialOperator('donated')
     print(donated)
     donated.insert_into_db()
+    # donated.delete_from_db()
     user.bind_category(salary)
 
     # user.categories(salary).set_val(10000)
