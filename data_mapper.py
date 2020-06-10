@@ -29,15 +29,15 @@ class FinancialMapper:
         self.connection = connection
         self.cursor = connection.cursor()
 
-    def find_by_id(self, name):
+    def search(self, _category):
         statement = f"SELECT classification, name, value FROM category WHERE name=?"
 
-        self.cursor.execute(statement, (name,))
+        self.cursor.execute(statement, (_category.name,))
         result = self.cursor.fetchall()
         if result:
             return Category(*result[0])
         else:
-            raise RecordNotFoundException(f'record with id={name} not found')
+            raise RecordNotFoundException(f'record with name={name} not found')
 
     def insert(self, _category):
         statement = f"INSERT INTO category (classification, name, value) VALUES \
@@ -47,8 +47,6 @@ class FinancialMapper:
             self.connection.commit()
         except Exception as e:
             raise DbCommitException(e.args)
-
-        return f'insert successfully done'
 
     def update(self, _category, value):
         _category.value = value
@@ -76,6 +74,8 @@ class Category:
 
 
 financial_mapper = FinancialMapper(connection)
+# smth = financial_mapper.search('products')
+# print(smth.__dict__)
 # category_1 = financial_mapper.find_by_id(1)
 # print(category_1.__dict__)
 #

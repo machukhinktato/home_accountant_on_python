@@ -84,6 +84,9 @@ class FinancialOperator:
     def delete_from_db(self):
         financial_mapper.delete(self)
 
+    def search(self):
+        result = financial_mapper.search(self)
+        return f'{result.__dict__}'
 
 if __name__ == '__main__':
     user = User('Misha')
@@ -93,7 +96,9 @@ if __name__ == '__main__':
     donated = FinancialOperator('donated')
     print(donated)
     donated.insert_into_db()
-    donated.update_db_data(10000)
+    print(donated.search())
+    # print(a.__dict__)
+    # donated.update_db_data(10000)
     print(donated)
     # donated.delete_from_db()
     user.bind_category(salary)
