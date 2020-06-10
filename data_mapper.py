@@ -50,8 +50,7 @@ class FinancialMapper:
 
         return f'insert successfully done'
 
-    def update(self, _category, name, value):
-        _category.name = name
+    def update(self, _category, value):
         _category.value = value
         statement = f"UPDATE category SET value=? WHERE name=?"
         self.cursor.execute(statement, (_category.value, _category.name))

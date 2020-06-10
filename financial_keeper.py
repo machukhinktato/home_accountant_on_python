@@ -78,8 +78,8 @@ class FinancialOperator:
     def insert_into_db(self):
         financial_mapper.insert(self)
 
-    def update_db_data(self, name, value):
-        financial_mapper.update(self, name, value)
+    def update_db_data(self, value):
+        financial_mapper.update(self, value)
 
     def delete_from_db(self):
         financial_mapper.delete(self)
@@ -93,7 +93,7 @@ if __name__ == '__main__':
     donated = FinancialOperator('donated')
     print(donated)
     donated.insert_into_db()
-    donated.update_db_data('donated', 10000)
+    donated.update_db_data(10000)
     print(donated)
     # donated.delete_from_db()
     user.bind_category(salary)
