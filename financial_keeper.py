@@ -42,13 +42,12 @@ class User:
         ttl = ttl_income - ttl_expense
         return f'{ttl}'
 
-
     def show_financial_streams(self):
         for val in self.category[:]:
             print(val.title, val.value)
 
 
-class Category:
+class FinnanceOperator:
     def __init__(self, name, classification='expense', balance=0):
         self.name = name.lower()
         self.classification = classification
@@ -77,16 +76,18 @@ class Category:
         return print(self.name, self.value)
 
     def insert_into_db(self):
-        # financial_mapper = FinancialMapper(connection)
+        financial_mapper.insert(self)
+
+    def delete_from_db(self):
         financial_mapper.insert(self)
 
 
 if __name__ == '__main__':
     user = User('Misha')
-    salary = Category('salary', 'income')
-    robbery = Category('robbery', 'income')
-    products = Category('products')
-    donated = Category('donated')
+    salary = FinnanceOperator('salary', 'income')
+    robbery = FinnanceOperator('robbery', 'income')
+    products = FinnanceOperator('products')
+    donated = FinnanceOperator('donated')
     print(donated)
     donated.insert_into_db()
     user.bind_category(salary)
