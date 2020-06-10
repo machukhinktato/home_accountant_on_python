@@ -58,9 +58,9 @@ class FinancialMapper:
         except Exception as e:
             raise DbUpdateException(e.args)
 
-    def delete(self, _category):
+    def delete(self, name):
         statement = f"DELETE FROM category WHERE name=?"
-        self.cursor.execute(statement)
+        self.cursor.execute(statement, ( name,))
         try:
             self.connection.commit()
         except Exception as e:
@@ -77,8 +77,9 @@ class Category:
 financial_mapper = FinancialMapper(connection)
 # category_1 = financial_mapper.find_by_id(1)
 # print(category_1.__dict__)
-salary = Category('expense', 'salary', 0)
-financial_mapper.insert(salary)
-banana = financial_mapper.find_by_id('donated')
-financial_mapper.delete('donated')
+#
+# financial_mapper.insert(salary)
+banana = financial_mapper.find_by_id('salary')
+print(banana.__dict__)
+financial_mapper.delete('salary')
 print(banana.__dict__)
