@@ -88,6 +88,7 @@ class FinancialOperator:
         result = financial_mapper.search(self)
         return f'{result.__dict__}'
 
+
 if __name__ == '__main__':
     user = User('Misha')
     salary = FinancialOperator('salary', 'income')
