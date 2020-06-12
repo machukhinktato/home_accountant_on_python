@@ -1,3 +1,4 @@
+import sqlite3
 from data_mapper import *
 
 
@@ -54,10 +55,10 @@ class FinancialOperator:
         self.value = balance
 
     def __str__(self):
-        return f'{self.classification} {self.name} {self.value} '
+        return f'{self.name} {self.classification} {self.value} '
 
     def __repr__(self):
-        return f'{self.classification} {self.name} {self.value} '
+        return f'{self.name} {self.classification} {self.value} '
 
     def __add__(self, other):
         pass
@@ -79,55 +80,33 @@ class FinancialOperator:
         financial_mapper.insert(self)
 
     def update_db_data(self, value):
-        financial_mapper.update(self, value)
+        _category = financial_mapper.search(self)
+        _category.value += value
+        financial_mapper.update(self, _category.value)
+        # print(self.search())
+        # data = self.search()
+        # print(data.keys('value'))
+        # financial_mapper.update(self, data.value)
 
     def delete_from_db(self):
+
         financial_mapper.delete(self)
 
     def search(self):
         result = financial_mapper.search(self)
-        return f'{result.__dict__}'
+        return result.__dict__
 
 
 if __name__ == '__main__':
     user = User('Misha')
     salary = FinancialOperator('salary', 'income')
-    robbery = FinancialOperator('robbery', 'income')
-    products = FinancialOperator('products')
-    donated = FinancialOperator('donated')
-    print(donated)
-    donated.insert_into_db()
-    print(donated.search())
-    # print(a.__dict__)
-    # donated.update_db_data(10000)
-    print(donated)
-    # donated.delete_from_db()
     user.bind_category(salary)
+    print(user.categories(salary).__dict__)
+    # user.categories(salary).update_db_data(500)
+    print(user.categories(salary).update_db_data(1500))
+    # print(user.categories(salary).update_db_data(1500))
+    # print(user.categories(salary).update_db_data(1500))
+    print(user.categories(salary).search())
 
-    # user.categories(salary).set_val(10000)
-    # print(user.categories(salary).get_val())
-    # user.category[0].set_val(10000)
-    # user.bind_category(products)
-    # user.category[1].set_val(5000)
-    # user.category[1].set_val(15000)
-    # user.bind_category(robbery)
-    # user.bind_category(donated)
-    # user.category[2].set_val(5000)
-    # user.category[3].set_val(10)
-    # user.show_financial_streams()
-    # print('_' * 30)
-    # print(user.show_income_sum())
-    # print('_' * 30)
-    # print(user.show_expense_sum())
-    # print('_' * 30)
-    # print(user.show_balance())
-    # print('_' * 30)
-    # user.category[1].set_val(1000)
-    # user.show_financial_streams()
-    # print('_' * 30)
-    # user.category[2].get_val()
-    # user.category[2].annul_val()
-    # user.category[2].set_val(3000)
-    # user.category[2].get_val()
-    # print(user.category[:])
-    # products = Category('products')
+    # print(user.categories(salary).insert_into_db())
+    # print(user)

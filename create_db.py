@@ -5,7 +5,7 @@ command = db.cursor()
 command.execute("""CREATE TABLE IF NOT EXISTS category (
     category_id INTEGER NOT NULL PRIMARY KEY , 
     classification TEXT,
-    name TEXT, /* there shall be a UNIQUE */ 
+    name TEXT, 
     value INTEGER
 ) """)
 db.commit()

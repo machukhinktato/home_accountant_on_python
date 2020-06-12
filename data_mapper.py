@@ -37,7 +37,7 @@ class FinancialMapper:
         if result:
             return Category(*result[0])
         else:
-            raise RecordNotFoundException(f'record with name={name} not found')
+            raise RecordNotFoundException(f'record with name={_category.name} not found')
 
     def insert(self, _category):
         statement = f"INSERT INTO category (classification, name, value) VALUES \
@@ -66,77 +66,71 @@ class FinancialMapper:
             raise DbDeleteException(e.args)
 
 
-class MapperRegistry:
-    @staticmethod
-    def get_mapper(obj):
-        if isinstance(obj, Category):
-            return PersonMapper(connection)
+# class MapperRegistry:
+#     @staticmethod
+#     def get_mapper(obj):
+#         if isinstance(obj, Category):
+#             return FinancialMapper(connection)
+#
+#
+# class UnitOfWork:
+#     current = threading.local()
+#
+#     def __init__(self):
+#         self.new_objects = []
+#         self.dirty_objects = []
+#         self.removed_objects = []
+#
+#     def register_new(self, obj):
+#         self.new_objects.append(obj)
+#
+#     def register_dirty(self, obj):
+#         self.dirty_objects.append(obj)
+#
+#     def register_removed(self, obj):
+#         self.removed_objects.append(obj)
+#
+#     def commit(self):
+#         self.insert_new()
+#         self.update_dirty()
+#         self.delete_removed()
+#
+#     def insert_new(self):
+#         for obj in self.new_objects:
+#             MapperRegistry.get_mapper(obj).insert(obj)
+#
+#     def update_dirty(self):
+#         for obj in self.dirty_objects:
+#             MapperRegistry.get_mapper(obj).update(obj)
+#
+#     def delete_removed(self):
+#         for obj in self.removed_objects:
+#             MapperRegistry.get_mapper(obj).delete(obj)
+#
+#     @staticmethod
+#     def new_current():
+#         __class__.set_current(UnitOfWork())
+#
+#     @classmethod
+#     def set_current(cls, unit_of_work):
+#         cls.current.unit_of_work = unit_of_work
+#
+#     @classmethod
+#     def get_current(cls):
+#         return cls.current.unit_of_work
+#
+#
+# class DomainObject:
+#
+#     def mark_new(self):
+#         UnitOfWork.get_current().register_new(self)
+#
+#     def mark_dirty(self):
+#         UnitOfWork.get_current().register_dirty(self)
+#
+#     def mark_removed(self):
+#         UnitOfWork.get_current().register_removed(self)
 
-
-class UnitOfWork:
-    current = threading.local()
-
-    def __init__(self):
-        self.new_objects = []
-        self.dirty_objects = []
-        self.removed_objects = []
-
-    def register_new(self, obj):
-        self.new_objects.append(obj)
-
-    def register_dirty(self, obj):
-        self.dirty_objects.append(obj)
-
-    def register_removed(self, obj):
-        self.removed_objects.append(obj)
-
-    def commit(self):
-        self.insert_new()
-        self.update_dirty()
-        self.delete_removed()
-
-    def insert_new(self):
-        for obj in self.new_objects:
-            MapperRegistry.get_mapper(obj).insert(obj)
-
-    def update_dirty(self):
-        for obj in self.dirty_objects:
-            MapperRegistry.get_mapper(obj).update(obj)
-
-    def delete_removed(self):
-        for obj in self.removed_objects:
-            MapperRegistry.get_mapper(obj).delete(obj)
-
-    @staticmethod
-    def new_current():
-        __class__.set_current(UnitOfWork())
-
-    @classmethod
-    def set_current(cls, unit_of_work):
-        cls.current.unit_of_work = unit_of_work
-
-    @classmethod
-    def get_current(cls):
-        return cls.current.unit_of_work
-
-
-class DomainObject:
-
-    def mark_new(self):
-        UnitOfWork.get_current().register_new(self)
-
-    def mark_dirty(self):
-        UnitOfWork.get_current().register_dirty(self)
-
-    def mark_removed(self):
-        UnitOfWork.get_current().register_removed(self)
-
-
-class Person(DomainObject):
-    def __init__(self, id_person, first_name, last_name):
-        self.id_person = id_person
-        self.last_name = last_name
-        self.first_name = first_name
 
 
 class Category:
@@ -147,13 +141,31 @@ class Category:
 
 
 financial_mapper = FinancialMapper(connection)
-# smth = financial_mapper.search('products')
-# print(smth.__dict__)
-# category_1 = financial_mapper.find_by_id(1)
-# print(category_1.__dict__)
+# try:
+#     UnitOfWork.new_current()
+#     new_person_1 = Category('expense', 'donated', 1000)
+#     new_person_2 = Category('income', 'salary', 1000)
+#     new_person_1.mark_new()
+#     new_person_2.mark_new()
 #
-# financial_mapper.insert(salary)
-# banana = financial_mapper.find_by_id('salary')
-# print(banana.__dict__)
-# financial_mapper.delete('salary')
-# print(banana.__dict__)
+#     category_mapper = FinancialMapper(connection)
+#     exists_category_1 = category_mapper.search(new_person_1)
+#     exists_category_1.mark_dirty()
+#     print(exists_category_1.__dict__)
+#     exists_category_1.name += ' on 10 day of march'
+#     print(exists_category_1.name)
+#
+#     exists_cat_2 = category_mapper.search(new_person_2)
+#     print(exists_cat_2.__dict__)
+#     exists_cat_2.value += 1500
+#     exists_cat_2.mark_dirty()
+#
+#     print(UnitOfWork.get_current().__dict__)
+#
+#     UnitOfWork.get_current().commit()
+# except Exception as e:
+#     print(e.args)
+# finally:
+#     UnitOfWork.set_current(None)
+#
+# print(UnitOfWork.get_current())
