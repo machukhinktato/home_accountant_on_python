@@ -39,6 +39,25 @@ class FinancialMapper:
         else:
             raise RecordNotFoundException(f'record with name={_category.name} not found')
 
+    # def call_all(self):
+    #     statement = f"-- SELECT * FROM category WHERE name IS NOT NULL "
+    #     self.cursor.execute(statement)
+    #     result = self.cursor.fetchall()
+    #     return result
+        # if result:
+        #     return Category(*result)
+
+    # def search_by_name(self, _category):
+    #     statement = f"SELECT classification, name, value FROM category WHERE name=?"
+    #
+    #     self.cursor.execute(statement, (_category.name,))
+    #     result = self.cursor.fetchall()
+    #     if result:
+    #         return Category(*result[0])
+    #     else:
+    #         raise RecordNotFoundException(f'record with name={_category.name} not found')
+    #
+
     def insert(self, _category):
         statement = f"INSERT INTO category (classification, name, value) VALUES \
                               (?, ?, ?)"
@@ -141,6 +160,11 @@ class Category:
 
 
 financial_mapper = FinancialMapper(connection)
+# result = financial_mapper.call_all()
+# print(result)
+# if result.name == dontated:
+#     result.name.delete()
+# result = financial_mapper.call_all()
 # try:
 #     UnitOfWork.new_current()
 #     new_person_1 = Category('expense', 'donated', 1000)

@@ -13,7 +13,7 @@ class User:
     def bind_category(self, category):
         self.category.append(category)
 
-    def categories(self, name):
+    def categories(self, name=None):
         categories = []
         for i in self.category:
             if name in self.category[:]:
@@ -89,12 +89,16 @@ class FinancialOperator:
         # financial_mapper.update(self, data.value)
 
     def delete_from_db(self):
-
+        _category = financial_mapper.search(self)
         financial_mapper.delete(self)
 
     def search(self):
         result = financial_mapper.search(self)
         return result.__dict__
+
+    def call_all(self):
+        result = financial_mapper.call_all()
+        return result
 
 
 if __name__ == '__main__':
@@ -102,11 +106,10 @@ if __name__ == '__main__':
     salary = FinancialOperator('salary', 'income')
     user.bind_category(salary)
     print(user.categories(salary).__dict__)
+    Category.categories().delete_from_db()
     # user.categories(salary).update_db_data(500)
-    print(user.categories(salary).update_db_data(1500))
     # print(user.categories(salary).update_db_data(1500))
     # print(user.categories(salary).update_db_data(1500))
-    print(user.categories(salary).search())
-
+    # print(user.categories(salary).update_db_data(1500))
     # print(user.categories(salary).insert_into_db())
     # print(user)
