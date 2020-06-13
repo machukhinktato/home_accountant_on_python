@@ -63,6 +63,8 @@ class FinancialOperator:
     def __add__(self, other):
         pass
 
+    # out of use
+
     def get_val(self):
         return print(self.name, self.value)
 
@@ -77,7 +79,10 @@ class FinancialOperator:
         return print(self.name, self.value)
 
     def insert_into_db(self):
-        financial_mapper.insert(self)
+        try:
+            financial_mapper.insert(self)
+        except Exception as e:
+            print(e.args)
 
     def update_db_data(self, value):
         _category = financial_mapper.search(self)

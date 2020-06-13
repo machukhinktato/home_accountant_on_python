@@ -39,6 +39,19 @@ class FinancialMapper:
         else:
             raise RecordNotFoundException(f'record with name={_category.name} not found')
 
+    def search_by_name(self, name):
+        try:
+            statement = f"SELECT classification, name, value FROM category WHERE name=?"
+
+            self.cursor.execute(statement, (name,))
+            result = self.cursor.fetchall()
+            if result:
+                return Category(*result[0])
+            else:
+                raise RecordNotFoundException(f'record with name={name} not found')
+        except Exception as e:
+            print(e.args)
+
     def insert(self, _category):
         statement = f"INSERT INTO category (classification, name, value) VALUES \
                               (?, ?, ?)"
@@ -66,6 +79,34 @@ class FinancialMapper:
             raise DbDeleteException(e.args)
 
 
+# class DataSearch:
+#     def __init__(self, connection):
+#         self.connection = connection
+#         self.cursor = connection.cursor()
+#
+#     def find_by_name(self, name):
+#         statement = f"SELECT classification, name, value FROM category WHERE name=?"
+#
+#         self.cursor.execute(statement, (name,))
+#         result = self.cursor.fetchall()
+#         if result:
+#             return Category(*result[0])
+#         else:
+#             raise RecordNotFoundException(f'record with name={name} not found')
+#
+#
+#
+#     def find_all(self):
+#         statement = f"SELECT classification, name, value FROM category"
+#
+#         self.cursor.execute(statement,)
+#         result = self.cursor.fetchall()
+#         if result:
+#             return Category(*result[:])
+#         else:
+#             raise RecordNotFoundException(f'record with name={name} not found')
+
+
 class Category:
     def __init__(self, classification, name, value):
         self.classification = classification
@@ -73,4 +114,7 @@ class Category:
         self.value = value
 
 
-financial_mapper = FinancialMapper(connection)
+# financial_mapper = FinancialMapper(connection)
+global_searcher = FinancialMapper(connection)
+otvet = global_searcher.search_by_name('products')
+print(otvet.__dict__)
