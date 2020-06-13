@@ -3,9 +3,9 @@ import sqlite3
 db = sqlite3.connect('fin_keeper.db')
 command = db.cursor()
 command.execute("""CREATE TABLE IF NOT EXISTS category (
-    category_id INTEGER NOT NULL PRIMARY KEY , 
+    category_id INTEGER NOT NULL PRIMARY KEY, 
     classification TEXT,
-    name TEXT, 
+    name TEXT UNIQUE,   
     value INTEGER
 ) """)
 db.commit()

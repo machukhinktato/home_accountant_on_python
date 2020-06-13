@@ -83,10 +83,6 @@ class FinancialOperator:
         _category = financial_mapper.search(self)
         _category.value += value
         financial_mapper.update(self, _category.value)
-        # print(self.search())
-        # data = self.search()
-        # print(data.keys('value'))
-        # financial_mapper.update(self, data.value)
 
     def delete_from_db(self):
         _category = financial_mapper.search(self)
@@ -105,11 +101,5 @@ if __name__ == '__main__':
     user = User('Misha')
     salary = FinancialOperator('salary', 'income')
     user.bind_category(salary)
-    print(user.categories(salary).__dict__)
+    print(user.categories(salary).call_all())
     Category.categories().delete_from_db()
-    # user.categories(salary).update_db_data(500)
-    # print(user.categories(salary).update_db_data(1500))
-    # print(user.categories(salary).update_db_data(1500))
-    # print(user.categories(salary).update_db_data(1500))
-    # print(user.categories(salary).insert_into_db())
-    # print(user)
