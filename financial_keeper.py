@@ -100,6 +100,8 @@ class FinancialOperator:
 if __name__ == '__main__':
     user = User('Misha')
     salary = FinancialOperator('salary', 'income')
+    salary1 = FinancialOperator('salary', 'income')
     user.bind_category(salary)
-    print(user.categories(salary).call_all())
-    Category.categories().delete_from_db()
+    user.bind_category(salary1)
+    user.categories(salary).insert_into_db()
+    user.categories(salary1).insert_into_db()
