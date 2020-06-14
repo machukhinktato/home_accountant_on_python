@@ -86,4 +86,4 @@ class Category:
         self.value = value
 
 
-# financial_mapper = FinancialMapper(connection)
+financial_mapper = FinancialMapper(connection)

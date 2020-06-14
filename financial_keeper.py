@@ -1,5 +1,5 @@
 import sqlite3
-from data_mapper import *
+from test import FinancialMapper, DomainObject
 
 
 class User:
@@ -48,7 +48,7 @@ class User:
             print(val.title, val.value)
 
 
-class FinancialOperator:
+class FinancialOperator(DomainObject):
     def __init__(self, name, classification='expense', balance=0):
         self.name = name.lower()
         self.classification = classification
@@ -103,19 +103,19 @@ class FinancialOperator:
         return result
 
 
-if __name__ == '__main__':
-    user = User('Misha')
-    salary = FinancialOperator('salary', 'income')
-    salary1 = FinancialOperator('salary', 'income')
-    user.bind_category(salary)
-    user.bind_category(salary1)
-    user.categories(salary).insert_into_db()
-    user.categories(salary1).insert_into_db()
-    searcher = financial_mapper.search_by_name('products')
-    print(searcher.__dict__)
-    user.categories(salary).update_db_data(1500)
-    print(user.categories(salary))
-    user.categories(salary).update_db_data(1550)
-    print(user.categories(salary))
-    user.categories(salary).delete_from_db()
-    print(user.categories(salary))
+# if __name__ == '__main__':
+    # user = User('Misha')
+    # salary = FinancialOperator('salary', 'income')
+    # salary1 = FinancialOperator('salary', 'income')
+    # user.bind_category(salary)
+    # user.bind_category(salary1)
+    # user.categories(salary).insert_into_db()
+    # user.categories(salary1).insert_into_db()
+    # searcher = financial_mapper.search_by_name('products')
+    # print(searcher.__dict__)
+    # user.categories(salary).update_db_data(1500)
+    # print(user.categories(salary))
+    # user.categories(salary).update_db_data(1550)
+    # print(user.categories(salary))
+    # user.categories(salary).delete_from_db()
+    # print(user.categories(salary))
