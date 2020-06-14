@@ -63,7 +63,8 @@ class FinancialOperator:
     def __add__(self, other):
         pass
 
-    # out of use
+    # next three methods are out of use
+    # decision about their future will be made later
 
     def get_val(self):
         return print(self.name, self.value)
@@ -110,3 +111,11 @@ if __name__ == '__main__':
     user.bind_category(salary1)
     user.categories(salary).insert_into_db()
     user.categories(salary1).insert_into_db()
+    searcher = financial_mapper.search_by_name('products')
+    print(searcher.__dict__)
+    user.categories(salary).update_db_data(1500)
+    print(user.categories(salary))
+    user.categories(salary).update_db_data(1550)
+    print(user.categories(salary))
+    user.categories(salary).delete_from_db()
+    print(user.categories(salary))
