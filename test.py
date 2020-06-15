@@ -158,8 +158,10 @@ class Person(DomainObject):
 
 
 class Category(DomainObject):
-    def __init__(self, name):
+    def __init__(self, classification, name, value):
+        self.classification = classification
         self.name = name
+        self.value = value
 
 
 class FinancialOperator(DomainObject):
@@ -169,10 +171,10 @@ class FinancialOperator(DomainObject):
         self.value = balance
 
     def __str__(self):
-        return f'{self.name} {self.classification} {self.value} '
+        return f'{self.name} {self.value} {self.classification}'
 
     def __repr__(self):
-        return f'{self.name} {self.classification} {self.value} '
+        return f'{self.name} {self.value} {self.classification}'
 
     def __add__(self, other):
         pass
@@ -223,13 +225,16 @@ class CategoryMapper:
 
 try:
     UnitOfWork.new_current()
-    new_person_1 = FinancialOperator('expense', 'car', 1000)
+    new_person_1 = FinancialOperator('car', 'expense', 1000)
     new_person_1.mark_new()
+    UnitOfWork.get_current().commit()
+    print(new_person_1)
 
-    new_person_2 = FinancialOperator('expense', 'air', 13000)
+    new_person_2 = FinancialOperator('air', 'expense', 13000)
     new_person_2.mark_new()
 
     financial_mapper = FinancialMapper(connection)
+    print(financial_mapper.search_by_name('car'))
     exists_person_1 = financial_mapper.search_by_name('car')
     print(exists_person_1)
     exists_person_1.mark_dirty()
