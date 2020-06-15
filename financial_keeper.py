@@ -65,7 +65,7 @@ class FinancialMapper:
 
     def update(self, _category):
         statement = f"UPDATE category SET name=?, value=?, name=?"
-        self.cursor.execute(statement, (_category.name, _category.value, _category.name))
+        self.cursor.execute(statement, (_category.name.lower(), _category.value, _category.name.lower()))
         try:
             self.connection.commit()
         except Exception as e:
@@ -207,6 +207,7 @@ class Category(DomainObject):
 
 try:
     UnitOfWork.new_current()
+    financial_mapper = FinancialMapper(connection)
     # new_person_1 = Category('car', 'expense', 1000)
     # new_person_1.mark_new()
     # print(new_person_1.__class__)
@@ -215,18 +216,18 @@ try:
     # print(new_person_2)
     # new_person_2.mark_new()
     #
-    financial_mapper = FinancialMapper(connection)
-    exists_person_1 = financial_mapper.search_by_name('products senior')
-    print(exists_person_1.__dict__)
-    print(exists_person_1.__class__)
-    # exists_person_1.value += 100000
+
+    # exists_person_1 = financial_mapper.search_by_name('car uniqlo TATARY')
+    # print(exists_person_1.__dict__)
+    # print(exists_person_1.__class__)
+    # exists_person_1.name += ' nouseSSSSS'
     # print(exists_person_1.__dict__)
     # print(exists_person_1.__class__)
     # exists_person_1.mark_dirty()
     # print(exists_person_1.name)
     # exists_person_2 = financial_mapper.search_by_name('car')
     # print(exists_person_2.__dict__)
-    exists_person_1.mark_removed()
+    # exists_person_1.mark_removed()
     # exists_person_3 = financial_mapper.search_by_name('air')
     # exists_person_3.mark_removed()
     UnitOfWork.get_current().commit()
@@ -234,22 +235,3 @@ try:
 #     print(e.args)
 finally:
     UnitOfWork.set_current(None)
-
-
-
-# if __name__ == '__main__':
-    # user = User('Misha')
-    # salary = FinancialOperator('salary', 'income')
-    # salary1 = FinancialOperator('salary', 'income')
-    # user.bind_category(salary)
-    # user.bind_category(salary1)
-    # user.categories(salary).insert_into_db()
-    # user.categories(salary1).insert_into_db()
-    # searcher = financial_mapper.search_by_name('products')
-    # print(searcher.__dict__)
-    # user.categories(salary).update_db_data(1500)
-    # print(user.categories(salary))
-    # user.categories(salary).update_db_data(1550)
-    # print(user.categories(salary))
-    # user.categories(salary).delete_from_db()
-    # print(user.categories(salary))
