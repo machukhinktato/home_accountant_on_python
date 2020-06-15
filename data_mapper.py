@@ -1,5 +1,4 @@
 import sqlite3
-import threading
 
 connection = sqlite3.connect('fin_keeper.db')
 
@@ -32,7 +31,7 @@ class FinancialMapper:
     def search(self, _category):
         statement = f"SELECT classification, name, value FROM category WHERE name=?"
 
-        self.cursor.execute(statement, (_category.name,))
+        self.cursor.execute(statement, (_category.name))
         result = self.cursor.fetchall()
         if result:
             return Category(*result[0])
@@ -41,7 +40,7 @@ class FinancialMapper:
 
     def search_by_name(self, name):
         try:
-            statement = f"SELECT classification, name, value FROM category WHERE name=?"
+            statement = f"SELECT name, classification, value FROM category WHERE name=?"
 
             self.cursor.execute(statement, (name,))
             result = self.cursor.fetchall()
@@ -61,10 +60,9 @@ class FinancialMapper:
         except Exception as e:
             raise DbCommitException(e.args)
 
-    def update(self, _category, value):
-        _category.value = value
-        statement = f"UPDATE category SET value=? WHERE name=?"
-        self.cursor.execute(statement, (_category.value, _category.name))
+    def update(self, _category):
+        statement = f"UPDATE category SET name=?, value=?, name=?"
+        self.cursor.execute(statement, (_category.name, _category.value, _category.name))
         try:
             self.connection.commit()
         except Exception as e:
@@ -77,13 +75,3 @@ class FinancialMapper:
             self.connection.commit()
         except Exception as e:
             raise DbDeleteException(e.args)
-
-
-class Category:
-    def __init__(self, classification, name, value):
-        self.classification = classification
-        self.name = name
-        self.value = value
-
-
-financial_mapper = FinancialMapper(connection)

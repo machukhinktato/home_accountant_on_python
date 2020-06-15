@@ -20,7 +20,7 @@ command.execute("SELECT category_id FROM category")
 if command.fetchone() is None:
     command.execute(
         "INSERT INTO category VALUES (?, ?, ?, ?)",
-        (category_id, name, classification, value))
+        (category_id, name, classification,  value))
     db.commit()
 else:
     print('wow')

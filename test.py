@@ -1,5 +1,6 @@
 import sqlite3
 import threading
+
 # from financial_keeper import FinancialOperator
 
 connection = sqlite3.connect('fin_keeper.db')
@@ -42,7 +43,7 @@ class FinancialMapper:
 
     def search_by_name(self, name):
         try:
-            statement = f"SELECT classification, name, value FROM category WHERE name=?"
+            statement = f"SELECT name, classification, value FROM category WHERE name=?"
 
             self.cursor.execute(statement, (name,))
             result = self.cursor.fetchall()
@@ -62,10 +63,9 @@ class FinancialMapper:
         except Exception as e:
             raise DbCommitException(e.args)
 
-    def update(self, _category, value):
-        _category.value = value
-        statement = f"UPDATE category SET value=? WHERE name=?"
-        self.cursor.execute(statement, (_category.value, _category.name))
+    def update(self, _category):
+        statement = f"UPDATE category SET name=?, value=?, name=?"
+        self.cursor.execute(statement, (_category.name, _category.value, _category.name))
         try:
             self.connection.commit()
         except Exception as e:
@@ -83,7 +83,7 @@ class FinancialMapper:
 class MapperRegistry:
     @staticmethod
     def get_mapper(obj):
-        if isinstance(obj, FinancialOperator):
+        if isinstance(obj, Category):
             return FinancialMapper(connection)
 
 
@@ -150,21 +150,14 @@ class DomainObject:
         UnitOfWork.get_current().register_removed(self)
 
 
-class Person(DomainObject):
-    def __init__(self, id_person, first_name, last_name):
-        self.id_person = id_person
-        self.last_name = last_name
-        self.first_name = first_name
+# class Category(DomainObject):
+#     def __init__(self, classification, name, value):
+#         self.classification = classification
+#         self.name = name
+#         self.value = value
 
 
 class Category(DomainObject):
-    def __init__(self, classification, name, value):
-        self.classification = classification
-        self.name = name
-        self.value = value
-
-
-class FinancialOperator(DomainObject):
     def __init__(self, name, classification='expense', balance=0):
         self.name = name.lower()
         self.classification = classification
@@ -225,32 +218,30 @@ class CategoryMapper:
 
 try:
     UnitOfWork.new_current()
-    new_person_1 = FinancialOperator('car', 'expense', 1000)
-    new_person_1.mark_new()
-    UnitOfWork.get_current().commit()
-    print(new_person_1)
-
-    new_person_2 = FinancialOperator('air', 'expense', 13000)
-    new_person_2.mark_new()
-
+    # new_person_1 = Category('car', 'expense', 1000)
+    # new_person_1.mark_new()
+    # print(new_person_1.__class__)
+    #
+    # new_person_2 = Category('air', 'expense', 13000)
+    # print(new_person_2)
+    # new_person_2.mark_new()
+    #
     financial_mapper = FinancialMapper(connection)
-    print(financial_mapper.search_by_name('car'))
-    exists_person_1 = financial_mapper.search_by_name('car')
-    print(exists_person_1)
+    exists_person_1 = financial_mapper.search_by_name('products')
+    print(exists_person_1.__dict__)
+    print(exists_person_1.__class__)
+    exists_person_1.name += ' Senior'
+    print(exists_person_1.__dict__)
+    print(exists_person_1.__class__)
     exists_person_1.mark_dirty()
     print(exists_person_1.name)
-    exists_person_1.name += ' Senior'
-    print(exists_person_1.name)
-
-    exists_person_2 = financial_mapper.search_by_name('air')
-    exists_person_2.mark_removed()
-
-    print(UnitOfWork.get_current().__dict__)
-
+    # exists_person_2 = financial_mapper.search_by_name('car')
+    # print(exists_person_2.__dict__)
+    # exists_person_2.mark_removed()
+    # exists_person_3 = financial_mapper.search_by_name('air')
+    # exists_person_3.mark_removed()
     UnitOfWork.get_current().commit()
 # except Exception as e:
 #     print(e.args)
 finally:
     UnitOfWork.set_current(None)
-
-print(UnitOfWork.get_current())
