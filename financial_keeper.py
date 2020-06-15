@@ -135,6 +135,7 @@ class MapperRegistry:
 
 class UnitOfWork:
     current = threading.local()
+    financial_registry = {}
 
     def __init__(self):
         self.new_objects = []
@@ -142,7 +143,8 @@ class UnitOfWork:
         self.removed_objects = []
 
     def register_new(self, obj):
-        self.new_objects.append(obj)
+        if self.add_fin_ops(obj):
+            self.new_objects.append(obj)
 
     def register_dirty(self, obj):
         self.dirty_objects.append(obj)
@@ -179,11 +181,24 @@ class UnitOfWork:
     def get_current(cls):
         return cls.current.unit_of_work
 
+    @classmethod
+    def add_fin_ops(cls, financial_operation):
+        if financial_operation.name not in cls.financial_registry.keys():
+            cls.financial_registry[financial_operation.name] = financial_operation
+    #
+    # @classmethod
+    # def get_fin_ops(cls, key):
+    #     if key in cls.financial_registry.keys():
+    #         return cls.financial_registry[key]
+    #     else:
+    #         return None
+
 
 class DomainObject:
 
     def mark_new(self):
         UnitOfWork.get_current().register_new(self)
+        UnitOfWork.get_current().add_fin_ops(self)
 
     def mark_dirty(self):
         UnitOfWork.get_current().register_dirty(self)
@@ -210,6 +225,8 @@ try:
     financial_mapper = FinancialMapper(connection)
     car = FinancialOperations('car', 'expense', 1000)
     car.mark_new()
+    # UnitOfWork.get_current().add_fin_ops(car)
+    print(UnitOfWork.financial_registry)
     # print(new_person_1.__class__)
     #
     # new_person_2 = Category('air', 'expense', 13000)
