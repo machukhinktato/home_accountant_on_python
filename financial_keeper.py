@@ -37,7 +37,7 @@ class FinancialMapper:
         self.cursor.execute(statement, (_category.name))
         result = self.cursor.fetchall()
         if result:
-            return Category(*result[0])
+            return FinancialOperations(*result[0])
         else:
             raise RecordNotFoundException(f'record with name={_category.name} not found')
 
@@ -129,7 +129,7 @@ class User:
 class MapperRegistry:
     @staticmethod
     def get_mapper(obj):
-        if isinstance(obj, Category):
+        if isinstance(obj, FinancialOperations):
             return FinancialMapper(connection)
 
 
@@ -192,7 +192,7 @@ class DomainObject:
         UnitOfWork.get_current().register_removed(self)
 
 
-class Category(DomainObject):
+class FinancialOperations(DomainObject):
     def __init__(self, name, classification='expense', balance=0):
         self.name = name.lower()
         self.classification = classification
@@ -208,8 +208,8 @@ class Category(DomainObject):
 try:
     UnitOfWork.new_current()
     financial_mapper = FinancialMapper(connection)
-    # new_person_1 = Category('car', 'expense', 1000)
-    # new_person_1.mark_new()
+    car = FinancialOperations('car', 'expense', 1000)
+    car.mark_new()
     # print(new_person_1.__class__)
     #
     # new_person_2 = Category('air', 'expense', 13000)
