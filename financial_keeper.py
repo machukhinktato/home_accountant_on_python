@@ -216,17 +216,17 @@ try:
     # new_person_2.mark_new()
     #
     financial_mapper = FinancialMapper(connection)
-    exists_person_1 = financial_mapper.search_by_name('products')
+    exists_person_1 = financial_mapper.search_by_name('products senior')
     print(exists_person_1.__dict__)
     print(exists_person_1.__class__)
-    # exists_person_1.name += ' Senior'
+    # exists_person_1.value += 100000
     # print(exists_person_1.__dict__)
     # print(exists_person_1.__class__)
     # exists_person_1.mark_dirty()
     # print(exists_person_1.name)
     # exists_person_2 = financial_mapper.search_by_name('car')
     # print(exists_person_2.__dict__)
-    # exists_person_2.mark_removed()
+    exists_person_1.mark_removed()
     # exists_person_3 = financial_mapper.search_by_name('air')
     # exists_person_3.mark_removed()
     UnitOfWork.get_current().commit()
