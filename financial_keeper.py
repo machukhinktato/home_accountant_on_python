@@ -48,7 +48,7 @@ class FinancialMapper:
             self.cursor.execute(statement, (name,))
             result = self.cursor.fetchall()
             if result:
-                return Category(*result[0])
+                return FinancialOperations(*result[0])
             else:
                 raise RecordNotFoundException(f'record with name={name} not found')
         except Exception as e:
@@ -143,8 +143,7 @@ class UnitOfWork:
         self.removed_objects = []
 
     def register_new(self, obj):
-        if self.add_fin_ops(obj):
-            self.new_objects.append(obj)
+        self.new_objects.append(obj)
 
     def register_dirty(self, obj):
         self.dirty_objects.append(obj)
@@ -181,11 +180,11 @@ class UnitOfWork:
     def get_current(cls):
         return cls.current.unit_of_work
 
-    @classmethod
-    def add_fin_ops(cls, financial_operation):
-        if financial_operation.name not in cls.financial_registry.keys():
-            cls.financial_registry[financial_operation.name] = financial_operation
-    #
+    # @classmethod
+    # def add_fin_ops(cls, financial_operation):
+    #     if financial_operation.name not in cls.financial_registry.keys():
+    #         cls.financial_registry[financial_operation.name] = financial_operation
+
     # @classmethod
     # def get_fin_ops(cls, key):
     #     if key in cls.financial_registry.keys():
@@ -198,7 +197,7 @@ class DomainObject:
 
     def mark_new(self):
         UnitOfWork.get_current().register_new(self)
-        UnitOfWork.get_current().add_fin_ops(self)
+        # UnitOfWork.get_current().add_fin_ops(self)
 
     def mark_dirty(self):
         UnitOfWork.get_current().register_dirty(self)
@@ -225,8 +224,10 @@ try:
     financial_mapper = FinancialMapper(connection)
     car = FinancialOperations('car', 'expense', 1000)
     car.mark_new()
+    result = financial_mapper.search_by_name('car')
+    print(result)
     # UnitOfWork.get_current().add_fin_ops(car)
-    print(UnitOfWork.financial_registry)
+    # print(UnitOfWork.financial_registry)
     # print(new_person_1.__class__)
     #
     # new_person_2 = Category('air', 'expense', 13000)
