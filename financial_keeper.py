@@ -1,5 +1,6 @@
 import sqlite3
 import threading
+
 # from data_mapper import FinancialMapper
 
 
@@ -30,6 +31,16 @@ class FinancialMapper:
     def __init__(self, connection):
         self.connection = connection
         self.cursor = connection.cursor()
+
+    def call_all(self):
+        statement = f"SELECT * FROM category"
+        self.cursor.execute(statement)
+        result = self.cursor.fetchall()
+        if result:
+            for obj in result:
+                print(obj)
+        else:
+            raise RecordNotFoundException(f'allah akbar')
 
     def search(self, _category):
         statement = f"SELECT classification, name, value FROM category WHERE name=?"
@@ -221,11 +232,19 @@ class FinancialOperations(DomainObject):
 
 try:
     UnitOfWork.new_current()
+    Misha = User('Misha')
+    print(Misha)
     financial_mapper = FinancialMapper(connection)
     car = FinancialOperations('car', 'expense', 1000)
     car.mark_new()
-    result = financial_mapper.search_by_name('car')
-    print(result)
+    print(car.__class__)
+    banana = financial_mapper.call_all()
+    print(banana)
+    # result = financial_mapper.search_by_name(*)
+    # print(result)
+    # Misha.bind_category(result)
+    # print(Misha.show_sum('expense'))
+    # print(UnitOfWork.)
     # UnitOfWork.get_current().add_fin_ops(car)
     # print(UnitOfWork.financial_registry)
     # print(new_person_1.__class__)
