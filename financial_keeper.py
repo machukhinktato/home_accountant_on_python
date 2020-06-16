@@ -65,6 +65,19 @@ class FinancialMapper:
         except Exception as e:
             print(e.args)
 
+    def global_search(self, classification):
+        try:
+            statement = f"SELECT name, classification, value FROM category WHERE classification=?"
+
+            self.cursor.execute(statement, (classification, ))
+            result = self.cursor.fetchall()
+            if result:
+                return result
+            else:
+                raise RecordNotFoundException(f'record with name={name} not found')
+        except Exception as e:
+            print(e.args)
+
     def insert(self, _category):
         statement = f"INSERT INTO category (classification, name, value) VALUES \
                               (?, ?, ?)"
@@ -110,11 +123,11 @@ class User:
                 return categories[0]
 
     def show_sum(self, classification):
-        sum_list = self.category[:]
+        sum_list = self.global_search(classification)
         calculator = []
-        for value in sum_list:
-            if value.classification == classification:
-                calculator.append(value.value)
+        for obj in sum_list:
+            if obj.classification == classification:
+                calculator.append(obj.value)
                 res = int(sum(calculator))
         return res
 
@@ -240,6 +253,9 @@ try:
     print(car.__class__)
     banana = financial_mapper.call_all()
     print(banana)
+    manana = financial_mapper.global_search('expense')
+    print(manana)
+    print(Misha.show_sum('expense'))
     # result = financial_mapper.search_by_name(*)
     # print(result)
     # Misha.bind_category(result)
