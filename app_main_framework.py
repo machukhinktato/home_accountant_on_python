@@ -1,3 +1,16 @@
+def index_view():
+    return '200 OK', 'Greetings from King Mike'
+
+
+def about_view():
+    return '200 OK', '<h1>King, since born</h1>'
+
+urls = {
+    '/', index_view(),
+    '/about', about_view()
+}
+
+
 def application(environ, start_response):
     path = environ['PATH_INFO']
     if path == '/':
