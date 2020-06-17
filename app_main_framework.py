@@ -22,6 +22,14 @@ class Application:
     def __call__(self, environ, start_response):
         path = environ['PATH_INFO']
 
+        if path in self.urls:
+            view = self.urls[path]
+            code, text = view()
+            start_response('200 OK', [('Content-Type', 'text/html')])
+            return [text.encode(encoding='utf-8')]
+        else:
+            return [b'not Found']
+
         if path == '/':
             start_response('200 OK', [('Content-Type', 'text/html')])
             return [b'Hello from a King Mike, whom trying to be the best']
