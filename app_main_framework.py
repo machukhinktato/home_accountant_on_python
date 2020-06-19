@@ -1,4 +1,5 @@
 from index import index_view
+from about import about_view
 
 
 class Application:
@@ -23,12 +24,6 @@ class Application:
         else:
             start_response('404 WHAT HAPPEND', [('Content-Type', 'text/html')])
             return [b'Not Found']
-
-
-def about_view(request):
-    if 'secret' in request:
-        return '200 OK', f'<h1>About Page {request["secret"]}</h1>'
-    return '200 OK', f'<h1>About Page</h1>'
 
 
 urls = {
