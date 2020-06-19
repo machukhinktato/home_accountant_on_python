@@ -1,33 +1,4 @@
-class Application:
-    def __init__(self, urls, middlewares):
-        self.urls = urls
-        self.middlewares = middlewares
-
-    def __call__(self, environ, start_response):
-        path = environ['PATH_INFO']
-
-        request = {}
-
-        for middleware in self.middlewares:
-            middleware(request)
-
-        if path in self.urls:
-            view = self.urls[path]
-            code, text = view(request)
-            start_response(code, [('Content-Type', 'text/html')])
-            return [text.encode(encoding='utf-8')]
-        else:
-            start_response('404 WHAT HAPPEND', [('Content-Type', 'text/html')])
-            return [b'Not Found']
-
-
-# Установка
-# pip install uwsgi
-
-# Запуск
-# uwsgi --http :8000 --wsgi-file simple_wsgi_server.py
-def index_view(request):
-    index = """<!DOCTYPE html>
+index = """<!DOCTYPE html>
             <html lang="en">
             <head>
                 <meta charset="UTF-8">
@@ -39,11 +10,11 @@ def index_view(request):
                 <!-- Latest compiled and minified CSS -->
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
                       integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-            
+
                 <!-- Optional theme -->
                 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css"
                       integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
-            
+
                 <!-- Latest compiled and minified JavaScript -->
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
                         integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd"
@@ -64,7 +35,7 @@ def index_view(request):
                         </button>
                         <a class="navbar-brand" href="{{ url_for('index') }}">@machukhinktato area</a>
                     </div>
-            
+
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
@@ -98,37 +69,14 @@ def index_view(request):
                 <div class="row">
                     <h1>
                         {% block content_title %}
-            
+
                         {% endblock %}
                     </h1>
                     {% block content %}
-            
+
                     {% endblock %}
                 </div>
             </div>
             </body>
         </html>"""
-    index.encode(encoding='utf-8')
-    return '200 OK', index
-
-
-def about_view(request):
-    if 'secret' in request:
-        return '200 OK', f'<h1>About Page {request["secret"]}</h1>'
-    return '200 OK', f'<h1>About Page</h1>'
-
-
-urls = {
-    '/': index_view,
-    '/about/': about_view
-}
-
-
-def secret_middleware(request):
-    request['secret'] = 'secret'
-
-
-middlewares = [secret_middleware]
-# middlewares = []
-
-application = Application(urls, middlewares)
+index.encode(encoding='utf-8')
