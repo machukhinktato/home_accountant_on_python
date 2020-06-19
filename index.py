@@ -26,10 +26,11 @@ def index_view(request):
                   <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                       <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                       </li>
                       <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="/about">About</a>
+                        <h1>Program which helps you to control your budget and be more effective</h1>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" href="#">Pricing</a>

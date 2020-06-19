@@ -33,12 +33,12 @@ def about_view(request):
 
 urls = {
     '/': index_view,
-    '/about/': about_view
+    '/about': about_view
 }
 
 
 def secret_middleware(request):
-    request['secret'] = 'secret'
+    request['secret'] = 'secret or not'
 
 
 middlewares = [secret_middleware]
