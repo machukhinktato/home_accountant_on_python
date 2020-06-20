@@ -45,17 +45,22 @@ def index_view():
             </div>
             
             
-                        <div class="col-md-offset-5 col-md-6">
-                <b> Program will provide you possibility to save all your expenses and incomes.</b>
-                <b>You can see an example of table with financial streams below.</b>
-            </div>
+            <div class="jumbotron">
+  <h1 class="display-4">Hello, mate!</h1>
+  <p class="lead">This program will provide you possibility to save all your expenses and incomes</p>
+  <hr class="my-4">
+  <p>It uses your personal data to analyze it and provide your detailed view of financial situaiton ocurred.</p>
+  <p class="lead">
+    <a class="btn btn-dark btn-lg" href="/create" role="button">Join us!</a>
+  </p>
+</div>
             
 
 <div id="accordion">
   <div class="card">
     <div class="card-header" id="headingOne">
       <h5 class="mb-0">
-        <button class="btn btn-outline-dark" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <button class="btn btn-outline-dark" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
           Example of table
         </button>
       </h5>
@@ -101,22 +106,44 @@ def index_view():
   <div class="card">
     <div class="card-header" id="headingTwo">
       <h5 class="mb-0">
-        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-          Collapsible Group Item #2
+        <button class="btn btn-outline-dark collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Example of table with summary
         </button>
       </h5>
     </div>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
       <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+        
+                              <table class="table table-dark">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">User</th>
+                      <th scope="col">Total income</th>
+                      <th scope="col">Total expense</th>
+                      <th scope="col">Balance</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mike</td>
+                      <td>15000</td>
+                      <td>15000</td>
+                      <td>0</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+          
       </div>
     </div>
   </div>
   <div class="card">
     <div class="card-header" id="headingThree">
       <h5 class="mb-0">
-        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-          Collapsible Group Item #3
+        <button class="btn btn-outline-dark collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Example of interface
         </button>
       </h5>
     </div>
