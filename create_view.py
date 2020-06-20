@@ -20,7 +20,7 @@ def create_view(request):
             </head>
             <body>
                 <nav class="navbar navbar-dark bg-dark">
-                  <a class="navbar-brand" href="/">Your Financial Keeper</a>
+                  <a class="navbar-brand" href="/">Welcome to your Financial Keeper</a>
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                   </button>
@@ -41,10 +41,27 @@ def create_view(request):
                     </h1>
                 </div>
             </div>
-            <img src="img.jpg"></img>
+            
+            <form>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                  </div>
+                  <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                  </div>
+                  <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            
             </body>
         </html>"""
     create.encode(encoding='utf-8')
-    return ['200 OK', index]
+    return ['200 OK', create]
 
 

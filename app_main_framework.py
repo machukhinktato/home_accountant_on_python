@@ -1,5 +1,6 @@
 from index import index_view
 from about import about_view
+from create_view import create_view
 
 
 class Application:

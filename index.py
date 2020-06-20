@@ -27,7 +27,9 @@ def index_view(request):
                   </button>
                   <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
-
+                      <li class="nav-item active">
+                        <a class="nav-link" href="/create">Join us<span class="sr-only">(current)</span></a>
+                      </li>
                       <li class="nav-item">
                         <a class="nav-link" href="/about">About</a>
                       </li>
