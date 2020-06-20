@@ -41,15 +41,120 @@ def about_view():
                         </h1>
                     </div>
                 </div>
-                <div class="card" style="width: 18rem;">
-                  <div class="card-body">
-                    <h5 class="card-title">Financial keeper</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">About us</h6>
-                    <p class="card-text">Program which helps you to control your budget and be more effective</p>
-                    <a href="/create" class="card-link">Create account</a>
-                    <a href="#" class="card-link">Subscribe us</a>
-                  </div>
-                </div>
+                <div class="col mb-5">
+                
+                <p>Program which helps you to control your budget and be more effective</p>
+                <p>Financial literacy is the possession of the set of skills and knowledge that allows an individual to make informed and effective decisions with all of their financial resources. Raising interest in personal finance is now a focus of state-run programs in countries including Australia, Canada, Japan, the United States and the United Kingdom. Understanding basic financial concepts allows people to know how to navigate in the financial system. People with appropriate financial literacy training make better financial decisions and manage money better that those without such training.</p>
+                <p>Below you can find examples of program</p>
+              </div>
+                
+                
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-outline-dark" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+          Example of table
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+      
+                      <table class="table table-dark">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Category</th>
+                      <th scope="col">Classification</th>
+                      <th scope="col">Money</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>products</td>
+                      <td>expense</td>
+                      <td>1000</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>salary</td>
+                      <td>income</td>
+                      <td>59000</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>car</td>
+                      <td>expense</td>
+                      <td>10000</td>
+                    </tr>
+                  </tbody>
+                </table>
+      
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-outline-dark collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Example of table with summary
+        </button>
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+      <div class="card-body">
+        
+                              <table class="table table-dark">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">User</th>
+                      <th scope="col">Total income</th>
+                      <th scope="col">Total expense</th>
+                      <th scope="col">Balance</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mike</td>
+                      <td>15000</td>
+                      <td>15000</td>
+                      <td>0</td>
+                    </tr>
+
+                  </tbody>
+                </table>
+          
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-outline-dark collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+          Example of interface
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+      
+      <div class="alert alert-danger" role="alert">
+  <h4 class="alert-heading">Sorry!</h4>
+  <p>Content at the moment is unavailable.</p>
+  <hr>
+  <p class="mb-0">We'll inform you via mail, when it will be ready.</p>
+  <p class="mb-0">Just do not forget to join us</p>
+</div>
+      
+      </div>
+    </div>
+  </div>
+</div>
                 </body>
             </html>"""
     about.encode(encoding='utf-8')
