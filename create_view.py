@@ -1,4 +1,4 @@
-def create_view(request):
+def create_view():
     create = """<!DOCTYPE html>
             <html lang="en">
             <head>
@@ -42,7 +42,7 @@ def create_view(request):
                 </div>
             </div>
             
-            <form>
+            <form class="col-md-4">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">

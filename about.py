@@ -1,4 +1,4 @@
-def about_view(request):
+def about_view():
     about = """<!DOCTYPE html>
                 <html lang="en">
                 <head>
@@ -46,7 +46,7 @@ def about_view(request):
                     <h5 class="card-title">Financial keeper</h5>
                     <h6 class="card-subtitle mb-2 text-muted">About us</h6>
                     <p class="card-text">Program which helps you to control your budget and be more effective</p>
-                    <a href="#" class="card-link">Create account</a>
+                    <a href="/create" class="card-link">Create account</a>
                     <a href="#" class="card-link">Subscribe us</a>
                   </div>
                 </div>
