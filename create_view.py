@@ -1,6 +1,5 @@
-def index_view(request):
-    # data = open('img.jpg', 'rb').read()
-    index = """<!DOCTYPE html>
+def create_view(request):
+    create = """<!DOCTYPE html>
             <html lang="en">
             <head>
                 <meta charset="UTF-8">
@@ -45,7 +44,7 @@ def index_view(request):
             <img src="img.jpg"></img>
             </body>
         </html>"""
-    index.encode(encoding='utf-8')
+    create.encode(encoding='utf-8')
     return ['200 OK', index]
 
 

@@ -28,7 +28,8 @@ class Application:
 
 urls = {
     '/': index_view,
-    '/about': about_view
+    '/about': about_view,
+    '/create': create_view
 }
 
 
