@@ -1,6 +1,7 @@
 import sqlite3
+import variables
 
-connection = sqlite3.connect('fin_keeper.db')
+connection = sqlite3.connect(DATABASE)
 
 
 class RecordNotFoundException(Exception):
