@@ -1,5 +1,5 @@
 import sqlite3
-import variables
+from variables import DATABASE
 
 connection = sqlite3.connect(DATABASE)
 

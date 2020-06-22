@@ -1,3 +1,5 @@
+from variables import CONNECTION_OK
+
 def about_view():
     about = """<!DOCTYPE html>
                 <html lang="en">
@@ -158,4 +160,4 @@ def about_view():
                 </body>
             </html>"""
     about.encode(encoding='utf-8')
-    return '200 OK', about
+    return CONNECTION_OK, about

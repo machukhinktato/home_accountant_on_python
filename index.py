@@ -1,3 +1,5 @@
+from variables import CONNECTION_OK
+
 def index_view():
     index = """<!DOCTYPE html>
             <html lang="en">
@@ -62,6 +64,6 @@ def index_view():
             </body>
         </html>"""
     index.encode(encoding='utf-8')
-    return ['200 OK', index]
+    return CONNECTION_OK, index
 
 

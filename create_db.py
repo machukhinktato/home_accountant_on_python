@@ -1,6 +1,7 @@
 import sqlite3
+from variables import DATABASE
 
-db = sqlite3.connect('fin_keeper.db')
+db = sqlite3.connect(DATABASE)
 command = db.cursor()
 command.execute("""CREATE TABLE IF NOT EXISTS category (
     category_id INTEGER NOT NULL PRIMARY KEY, 
