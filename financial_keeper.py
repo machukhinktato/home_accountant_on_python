@@ -254,8 +254,13 @@ try:
     banana = financial_mapper.call_all()
     print(banana)
     manana = financial_mapper.global_search('expense')
-    print(manana)
-    print(Misha.show_sum('expense'))
+    result = []
+    for i in manana:
+        result.append(i[2])
+        print(sum(result))
+
+    # print(manana)
+    # print(Misha.categories(car).count())
     # result = financial_mapper.search_by_name(*)
     # print(result)
     # Misha.bind_category(result)

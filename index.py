@@ -1,5 +1,6 @@
 from variables import CONNECTION_OK
 
+
 def index_view():
     index = """<!DOCTYPE html>
             <html lang="en">

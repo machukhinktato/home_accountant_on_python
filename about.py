@@ -1,5 +1,6 @@
 from variables import CONNECTION_OK
 
+
 def about_view():
     about = """<!DOCTYPE html>
                 <html lang="en">

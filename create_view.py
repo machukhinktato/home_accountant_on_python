@@ -1,3 +1,6 @@
+from variables import CONNECTION_OK
+
+
 def create_view():
     create = """<!DOCTYPE html>
             <html lang="en">
@@ -58,6 +61,6 @@ def create_view():
             </body>
         </html>"""
     create.encode(encoding='utf-8')
-    return ['200 OK', create]
+    return CONNECTION_OK, create
 
 

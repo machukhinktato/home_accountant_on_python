@@ -33,9 +33,9 @@ class FinancialMapper:
         statement = f"SELECT classification, name, value FROM category WHERE name=?"
 
         self.cursor.execute(statement, (_category.name))
-        result = self.cursor.fetchall()
+        result = self.cursor.fetchone()
         if result:
-            return Category(*result[0])
+            return Category(*result)
         else:
             raise RecordNotFoundException(f'record with name={_category.name} not found')
 
@@ -44,9 +44,9 @@ class FinancialMapper:
             statement = f"SELECT name, classification, value FROM category WHERE name=?"
 
             self.cursor.execute(statement, (name,))
-            result = self.cursor.fetchall()
+            result = self.cursor.fetchone()
             if result:
-                return Category(*result[0])
+                return Category(*result)
             else:
                 raise RecordNotFoundException(f'record with name={name} not found')
         except Exception as e:
