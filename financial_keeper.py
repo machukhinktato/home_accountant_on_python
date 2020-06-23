@@ -1,10 +1,9 @@
 import sqlite3
 import threading
+from variables import DATABASE
 
-# from data_mapper import FinancialMapper
 
-
-connection = sqlite3.connect('fin_keeper.db')
+connection = sqlite3.connect(DATABASE)
 
 
 class RecordNotFoundException(Exception):
@@ -40,15 +39,15 @@ class FinancialMapper:
             for obj in result:
                 print(obj)
         else:
-            raise RecordNotFoundException(f'allah akbar')
+            raise RecordNotFoundException('there is no records')
 
     def search(self, _category):
         statement = f"SELECT classification, name, value FROM category WHERE name=?"
 
         self.cursor.execute(statement, (_category.name))
-        result = self.cursor.fetchall()
+        result = self.cursor.fetchone()
         if result:
-            return FinancialOperations(*result[0])
+            return FinancialOperations(*result)
         else:
             raise RecordNotFoundException(f'record with name={_category.name} not found')
 
@@ -57,9 +56,9 @@ class FinancialMapper:
             statement = f"SELECT name, classification, value FROM category WHERE name=?"
 
             self.cursor.execute(statement, (name,))
-            result = self.cursor.fetchall()
+            result = self.cursor.fetchone()
             if result:
-                return FinancialOperations(*result[0])
+                return FinancialOperations(*result)
             else:
                 raise RecordNotFoundException(f'record with name={name} not found')
         except Exception as e:
@@ -120,7 +119,7 @@ class User:
         for i in self.category:
             if name in self.category[:]:
                 categories.append(i)
-                return categories[0]
+                return categories
 
     def show_sum(self, classification):
         sum_list = self.global_search(classification)
@@ -204,18 +203,6 @@ class UnitOfWork:
     def get_current(cls):
         return cls.current.unit_of_work
 
-    # @classmethod
-    # def add_fin_ops(cls, financial_operation):
-    #     if financial_operation.name not in cls.financial_registry.keys():
-    #         cls.financial_registry[financial_operation.name] = financial_operation
-
-    # @classmethod
-    # def get_fin_ops(cls, key):
-    #     if key in cls.financial_registry.keys():
-    #         return cls.financial_registry[key]
-    #     else:
-    #         return None
-
 
 class DomainObject:
 
@@ -257,7 +244,7 @@ try:
     result = []
     for i in manana:
         result.append(i[2])
-        print(sum(result))
+    print(sum(result))
 
     # print(manana)
     # print(Misha.categories(car).count())

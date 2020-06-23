@@ -9,7 +9,7 @@ class Application:
 
     def __call__(self, environ, start_response):
         path = environ['PATH_INFO']
-        post = environ['REQUEST_METHOD']
+        # post = environ['REQUEST_METHOD'] - in progress
 
         if path in self.urls:
             if post == 'POST':
