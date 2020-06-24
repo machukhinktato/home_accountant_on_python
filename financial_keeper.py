@@ -111,42 +111,42 @@ class User:
     def __str__(self):
         return f'{self.name} {self.category[:]}'
 
-    def bind_category(self, category):
-        self.category.append(category)
-
-    def categories(self, name=None):
-        categories = []
-        for i in self.category:
-            if name in self.category[:]:
-                categories.append(i)
-                return categories
-
-    def show_sum(self, classification):
-        sum_list = self.global_search(classification)
-        calculator = []
-        for obj in sum_list:
-            if obj.classification == classification:
-                calculator.append(obj.value)
-                res = int(sum(calculator))
-        return res
-
-    def show_income_sum(self):
-        income = self.show_sum('income')
-        return f'income {income}'
-
-    def show_expense_sum(self):
-        expense = self.show_sum('expense')
-        return f'expense {expense}'
-
-    def show_balance(self):
-        ttl_income = self.show_sum('income')
-        ttl_expense = self.show_sum('expense')
-        ttl = ttl_income - ttl_expense
-        return f'{ttl}'
-
-    def show_financial_streams(self):
-        for val in self.category[:]:
-            print(val.title, val.value)
+    # def bind_category(self, category):
+    #     self.category.append(category)
+    #
+    # def categories(self, name=None):
+    #     categories = []
+    #     for i in self.category:
+    #         if name in self.category[:]:
+    #             categories.append(i)
+    #             return categories
+    #
+    # def show_sum(self, classification):
+    #     sum_list = self.global_search(classification)
+    #     calculator = []
+    #     for obj in sum_list:
+    #         if obj.classification == classification:
+    #             calculator.append(obj.value)
+    #             res = int(sum(calculator))
+    #     return res
+    #
+    # def show_income_sum(self):
+    #     income = self.show_sum('income')
+    #     return f'income {income}'
+    #
+    # def show_expense_sum(self):
+    #     expense = self.show_sum('expense')
+    #     return f'expense {expense}'
+    #
+    # def show_balance(self):
+    #     ttl_income = self.show_sum('income')
+    #     ttl_expense = self.show_sum('expense')
+    #     ttl = ttl_income - ttl_expense
+    #     return f'{ttl}'
+    #
+    # def show_financial_streams(self):
+    #     for val in self.category[:]:
+    #         print(val.title, val.value)
 
 
 class MapperRegistry:
@@ -278,5 +278,6 @@ try:
     UnitOfWork.get_current().commit()
 # except Exception as e:
 #     print(e.args)
+#     thanks ok
 finally:
     UnitOfWork.set_current(None)
